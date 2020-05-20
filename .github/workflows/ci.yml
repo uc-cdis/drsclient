@@ -1,0 +1,63 @@
+name: CI Workflow
+
+on: [push]
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:9.6
+        env:
+          POSTGRES_USER: mds
+          POSTGRES_PASSWORD: mds
+          POSTGRES_DB: test_mds
+        ports:
+        - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - uses: actions/cache@preview
+      with:
+        path: ~/.cache/pypoetry/virtualenvs
+        key: ${{ runner.os }}-poetry-${{ hashFiles(format('{0}{1}', github.workspace, '/poetry.lock')) }}
+        restore-keys: |
+          ${{ runner.os }}-poetry-
+    - name: Install dependencies
+      run: |
+        curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+        $HOME/.poetry/bin/poetry install
+    - name: Test with pytest
+      env:
+        DB_HOST: localhost
+        DB_PORT: ${{ job.services.postgres.ports[5432] }}
+        DB_USER: mds
+        DB_PASSWORD: mds
+      run: |
+        $HOME/.poetry/bin/poetry run pytest --cov=src --cov=migrations/versions --cov-fail-under=97 --cov-report xml
+    - name: Submit coverage report
+      if: github.ref == 'refs/heads/master'
+      env:
+        CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_TOKEN }}
+      run: |
+        pip install codacy-coverage
+        python-codacy-coverage -r coverage.xml
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Publish to GitHub Packages
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: uc-cdis/metadata-service/mds
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          tag_names: true
