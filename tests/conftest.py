@@ -5,6 +5,7 @@ from cdisutilstest.code.conftest import (
     setup_database,
     create_user,
     clear_database,
+    create_user,
 )
 from drsclient.client import DrsClient
 
@@ -21,6 +22,7 @@ def index_client(indexd_client):
     """
     return indexd_client
 
+
 @pytest.fixture(scope="function")
 def drs_client(indexd_server):
     """
@@ -31,11 +33,10 @@ def drs_client(indexd_server):
     Runs once per test.
     """
     # setup_database()
-    client = DrsClient(
-        baseurl=indexd_server.baseurl, auth="admin"
-    )
+    client = DrsClient(baseurl=indexd_server.baseurl, auth=create_user("user", "user"))
     yield client
     clear_database()
+
 
 @pytest.fixture(scope="function")
 def drsclient(drs_client):

@@ -2,8 +2,7 @@ import json
 import pytest
 import uuid
 import requests
-
-# import responses
+import requests_mock
 from drsclient import __version__
 from drsclient.client import DrsClient
 import asyncio
@@ -13,46 +12,62 @@ from cdisutilstest.code.indexd_fixture import (
     create_random_index_version,
 )
 
+def test_test():
+    with requests_mock.Mocker() as m:
+        m.get("https://something.com", text="resp")
+        assert requests.get("https://something.com").text == "resp"
+        m.post("https://something.com", text="Done!")
+        assert requests.post("https://something.com", data={"somedata": 1123})
+
 
 def test_version():
     assert __version__ == "0.1.0"
 
 
-def get_index_doc(has_version=True, urls=list(), add_bundle=False):
+def get_index_doc():
     doc = {
         "form": "object",
         "size": 123,
         "urls": ["s3://endpointurl/bucket/key"],
         "hashes": {"md5": "8b9942cf415384b27cadf1f4d2d682e5"},
     }
-    if has_version:
-        doc["version"] = "1"
-    if urls:
-        doc["urls"] = urls
-
     return doc
+
+
+# def create_index_record():
+#     guid = str(uuid.uuid4())
+#     i_data = get_index_doc(guid)
+
+#     with requests_mock.Mocker() as m:
+#         m.get(BASE_URL+"/index/"+guid, json=i_data)
+#         m.get(BASE_URL+"/index/bundle"+guid, json=i_data)
+#         m.get(BASE_URL+"/index/ga4gh/drs/v1/objects"+guid, json=i_data)
+#         assert requests.get(BASE_URL+"/index/"+guid).status_code == 200
+#         assert requests.get(BASE_URL+"/index/bundle"+guid).status_code == 200
+#         assert requests.get(BASE_URL+"/index/ga4gh/drs/v1/objects"+guid).status_code == 200
+#     return guid, i_data
 def create_index_record(index_client):
     i_data = get_index_doc()
     res1 = index_client.create(
-        hashes=i_data["hashes"],
-        size=i_data["size"],
-        urls=i_data["urls"]
-        )
-    rec1 = res1._doc
-    assert rec1
+        hashes=i_data["hashes"], size=i_data["size"], urls=i_data["urls"]
+    )
+    rec1 = res1.did
+    return rec1
 
-    return rec1["did"], rec1
 
 def test_get_latest_version(index_client):
     """
     Args:
         index_client (indexclient.client.IndexClient): IndexClient Pytest Fixture
     """
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    print(index_client)
     doc = create_random_index(index_client)
     latest = index_client.get_latest_version(doc.did)
     assert latest.did == doc.did
     assert latest.file_name == doc.file_name
     assert latest.hashes == doc.hashes
+
 
 def test_check_status(index_client, drs_client):
     res = drs_client.check_status()
@@ -60,22 +75,24 @@ def test_check_status(index_client, drs_client):
     print(res.status_code)
     assert res.status_code == 200
 
+
 def test_post_index(index_client, drsclient):
-    did, rec1 = create_index_record(index_client)
-    assert rec1["did"] == did
-    res2 = drsclient.get(did=None)
+    did = create_index_record(index_client)
+    res2 = drsclient.get(did=did)
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    print(res2)
-    assert res2.status_code == 200
+    print(res2.json())
+
 
 def test_create_bundle(index_client, drsclient):
-    did, rec = create_index_record(index_client)
-    assert rec["did"]
+    did = create_index_record(index_client)
+    assert did
     res1 = drsclient.create(bundles=[did])
     assert res1.status_code == 200
+    print("!!!!!!!!!!!!!!!!!!!!!!1")
+    print(res1.json())
 
 
-# def test_bundle_get():
+# def test_bundle_get():s
 #     client = DrsClient(baseurl="https://binamb.planx-pla.net/", auth=None)
 #     assert client.url == "https://binamb.planx-pla.net/"
 #     print(client.get("068a03ae-40d2-4360-97f9-defbdf923814"))
