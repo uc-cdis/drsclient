@@ -140,6 +140,7 @@ version = "0.2.4"
 reference = "bdfdeb05e45407e839fd954ce6d195d847cd8024"
 type = "git"
 url = "https://github.com/uc-cdis/cdisutils-test.git"
+
 [[package]]
 category = "main"
 description = "Python package for providing Mozilla's CA Bundle."
@@ -231,6 +232,7 @@ requests = ">=2.5.2,<3.0.0"
 reference = "1a5f4b2a0b04577f31f3dcec511ade117d9f4ba1"
 type = "git"
 url = "https://github.com/uc-cdis/doiclient.git"
+
 [[package]]
 category = "dev"
 description = ""
@@ -246,6 +248,7 @@ requests = ">=2.5.2,<3.0.0"
 reference = "38c0f1ab42edf3efb1ad6348d7dbdff81b131360"
 type = "git"
 url = "https://github.com/uc-cdis/dosclient.git"
+
 [[package]]
 category = "dev"
 description = "A simple framework for building complex web applications."
@@ -321,6 +324,7 @@ requests = ">=2.5.2,<3.0.0"
 reference = "f122072ee245216da5e4260f718d6f886db81773"
 type = "git"
 url = "https://github.com/uc-cdis/hsclient.git"
+
 [[package]]
 category = "main"
 description = "Chromium HSTS Preload list as a Python package and updated daily"
@@ -417,6 +421,7 @@ sqlalchemy-utils = ">=0.33.11"
 reference = "23f53982d71210a402c90c3431d9a5b16f2f1c4e"
 type = "git"
 url = "https://github.com/uc-cdis/indexd.git"
+
 [[package]]
 category = "dev"
 description = "Simple module to parse ISO 8601 dates"
@@ -448,7 +453,7 @@ MarkupSafe = ">=0.23"
 i18n = ["Babel (>=0.8)"]
 
 [[package]]
-category = "dev"
+category = "main"
 description = "An implementation of JSON Schema validation for Python"
 name = "jsonschema"
 optional = false
@@ -892,7 +897,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "eb6bf646373495affce40b098784f6539e01d310e5d4509bea11499a64764f74"
+content-hash = "3285a8cd4438c18d7f4f2c707db99e9f1393b1340e902f2922cb12708a4e1a37"
 python-versions = "^3.7"
 
 [metadata.files]
