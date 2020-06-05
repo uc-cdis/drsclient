@@ -9,7 +9,7 @@ env:
 install:
 - pip install poetry
 - poetry install -v
-script: poetry run pytest -vv
+script: poetry run pytest -vv tests/
 before_deploy:
 - sed -i.bak "s/=get_version()/='$TRAVIS_TAG'/g" setup.py
 - cat setup.py
