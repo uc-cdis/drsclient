@@ -140,7 +140,6 @@ version = "0.2.4"
 reference = "bdfdeb05e45407e839fd954ce6d195d847cd8024"
 type = "git"
 url = "https://github.com/uc-cdis/cdisutils-test.git"
-
 [[package]]
 category = "main"
 description = "Python package for providing Mozilla's CA Bundle."
@@ -232,7 +231,6 @@ requests = ">=2.5.2,<3.0.0"
 reference = "1a5f4b2a0b04577f31f3dcec511ade117d9f4ba1"
 type = "git"
 url = "https://github.com/uc-cdis/doiclient.git"
-
 [[package]]
 category = "dev"
 description = ""
@@ -248,7 +246,6 @@ requests = ">=2.5.2,<3.0.0"
 reference = "38c0f1ab42edf3efb1ad6348d7dbdff81b131360"
 type = "git"
 url = "https://github.com/uc-cdis/dosclient.git"
-
 [[package]]
 category = "dev"
 description = "A simple framework for building complex web applications."
@@ -324,7 +321,6 @@ requests = ">=2.5.2,<3.0.0"
 reference = "f122072ee245216da5e4260f718d6f886db81773"
 type = "git"
 url = "https://github.com/uc-cdis/hsclient.git"
-
 [[package]]
 category = "main"
 description = "Chromium HSTS Preload list as a Python package and updated daily"
@@ -375,14 +371,14 @@ marker = "python_version < \"3.8\""
 name = "importlib-metadata"
 optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
-version = "1.6.0"
+version = "1.6.1"
 
 [package.dependencies]
 zipp = ">=0.5"
 
 [package.extras]
 docs = ["sphinx", "rst.linker"]
-testing = ["packaging", "importlib-resources"]
+testing = ["packaging", "pep517", "importlib-resources (>=1.3)"]
 
 [[package]]
 category = "dev"
@@ -421,7 +417,6 @@ sqlalchemy-utils = ">=0.33.11"
 reference = "23f53982d71210a402c90c3431d9a5b16f2f1c4e"
 type = "git"
 url = "https://github.com/uc-cdis/indexd.git"
-
 [[package]]
 category = "dev"
 description = "Simple module to parse ISO 8601 dates"
@@ -1059,8 +1054,8 @@ idna = [
     {file = "idna-2.9.tar.gz", hash = "sha256:7588d1c14ae4c77d74036e8c22ff447b26d0fde8f007354fd48a7814db15b7cb"},
 ]
 importlib-metadata = [
-    {file = "importlib_metadata-1.6.0-py2.py3-none-any.whl", hash = "sha256:2a688cbaa90e0cc587f1df48bdc97a6eadccdcd9c35fb3f976a09e3b5016d90f"},
-    {file = "importlib_metadata-1.6.0.tar.gz", hash = "sha256:34513a8a0c4962bc66d35b359558fd8a5e10cd472d37aec5f66858addef32c1e"},
+    {file = "importlib_metadata-1.6.1-py2.py3-none-any.whl", hash = "sha256:15ec6c0fd909e893e3a08b3a7c76ecb149122fb14b7efe1199ddd4c7c57ea958"},
+    {file = "importlib_metadata-1.6.1.tar.gz", hash = "sha256:0505dd08068cfec00f53a74a0ad927676d7757da81b7436a6eefe4c7cf75c545"},
 ]
 indexclient = [
     {file = "indexclient-2.1.0.tar.gz", hash = "sha256:777476eb97febfcd663b7f9454fba5151dee4d17254bfa0dfb5ff040c59b8532"},
