@@ -1,5 +1,5 @@
 [[package]]
-category = "main"
+category = "dev"
 description = "Addict is a dictionary whose items can be set using both attribute and item syntax."
 name = "addict"
 optional = false
@@ -7,7 +7,7 @@ python-versions = "*"
 version = "2.2.1"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Python command-line parsing library"
 name = "argparse"
 optional = false
@@ -46,7 +46,7 @@ docs = ["sphinx", "zope.interface"]
 tests = ["coverage", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "zope.interface"]
 
 [[package]]
-category = "main"
+category = "dev"
 description = "The ultimate Python library in building OAuth and OpenID Connect servers."
 name = "authlib"
 optional = false
@@ -60,7 +60,7 @@ cryptography = "*"
 client = ["requests"]
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Gen3 auth utility functions"
 name = "authutils"
 optional = false
@@ -81,7 +81,7 @@ requests = ">=2.6,<3.0"
 xmltodict = ">=0.9,<1.0"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Internationalization utilities"
 name = "babel"
 optional = false
@@ -100,7 +100,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 version = "1.10.0"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "A decorator for caching properties in classes."
 name = "cached-property"
 optional = false
@@ -108,7 +108,7 @@ python-versions = "*"
 version = "1.5.1"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "The auth system for the gdcapi."
 name = "cdiserrors"
 optional = false
@@ -121,7 +121,7 @@ Werkzeug = "*"
 cdislogging = ">=0.0.2"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Standardized logging tool and format for cdis applications"
 name = "cdislogging"
 optional = false
@@ -149,7 +149,7 @@ python-versions = "*"
 version = "2020.4.5.1"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Foreign Function Interface for Python calling C code."
 name = "cffi"
 optional = false
@@ -168,7 +168,7 @@ python-versions = "*"
 version = "3.0.4"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Composable command line interface toolkit"
 name = "click"
 optional = false
@@ -185,7 +185,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 version = "0.4.3"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "cryptography is a package which provides cryptographic recipes and primitives to Python developers."
 name = "cryptography"
 optional = false
@@ -204,7 +204,7 @@ pep8test = ["flake8", "flake8-import-order", "pep8-naming"]
 test = ["pytest (>=3.6.0,<3.9.0 || >3.9.0,<3.9.1 || >3.9.1,<3.9.2 || >3.9.2)", "pretend", "iso8601", "pytz", "hypothesis (>=1.11.4,<3.79.2 || >3.79.2)"]
 
 [[package]]
-category = "main"
+category = "dev"
 description = "A collection of Python deprecation patterns and strategies that help you collect your technical debt in a non-destructive manner."
 name = "debtcollector"
 optional = false
@@ -217,7 +217,7 @@ six = ">=1.10.0"
 wrapt = ">=1.7.0"
 
 [[package]]
-category = "main"
+category = "dev"
 description = ""
 name = "doiclient"
 optional = false
@@ -232,7 +232,7 @@ reference = "1a5f4b2a0b04577f31f3dcec511ade117d9f4ba1"
 type = "git"
 url = "https://github.com/uc-cdis/doiclient.git"
 [[package]]
-category = "main"
+category = "dev"
 description = ""
 name = "dosclient"
 optional = false
@@ -247,7 +247,7 @@ reference = "38c0f1ab42edf3efb1ad6348d7dbdff81b131360"
 type = "git"
 url = "https://github.com/uc-cdis/dosclient.git"
 [[package]]
-category = "main"
+category = "dev"
 description = "A simple framework for building complex web applications."
 name = "flask"
 optional = false
@@ -266,7 +266,7 @@ docs = ["sphinx", "pallets-sphinx-themes", "sphinxcontrib-log-cabinet", "sphinx-
 dotenv = ["python-dotenv"]
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Gen3 RBAC Client"
 name = "gen3rbac"
 optional = false
@@ -307,7 +307,7 @@ python-versions = "*"
 version = "3.0.0"
 
 [[package]]
-category = "main"
+category = "dev"
 description = ""
 name = "hsclient"
 optional = false
@@ -381,7 +381,7 @@ docs = ["sphinx", "rst.linker"]
 testing = ["packaging", "importlib-resources"]
 
 [[package]]
-category = "main"
+category = "dev"
 description = ""
 name = "indexclient"
 optional = false
@@ -392,7 +392,7 @@ version = "2.1.0"
 requests = ">=2.5.2,<3.0.0"
 
 [[package]]
-category = "main"
+category = "dev"
 description = ""
 name = "indexd"
 optional = false
@@ -418,7 +418,7 @@ reference = "23f53982d71210a402c90c3431d9a5b16f2f1c4e"
 type = "git"
 url = "https://github.com/uc-cdis/indexd.git"
 [[package]]
-category = "main"
+category = "dev"
 description = "Simple module to parse ISO 8601 dates"
 name = "iso8601"
 optional = false
@@ -426,7 +426,7 @@ python-versions = "*"
 version = "0.1.12"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Various helpers to pass data to untrusted environments and back."
 name = "itsdangerous"
 optional = false
@@ -434,7 +434,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "1.1.0"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "A very fast and expressive template engine."
 name = "jinja2"
 optional = false
@@ -448,7 +448,7 @@ MarkupSafe = ">=0.23"
 i18n = ["Babel (>=0.8)"]
 
 [[package]]
-category = "main"
+category = "dev"
 description = "An implementation of JSON Schema validation for Python"
 name = "jsonschema"
 optional = false
@@ -459,7 +459,7 @@ version = "2.5.1"
 format = ["rfc3987", "strict-rfc3339", "webcolors"]
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Safely add untrusted strings to HTML/XML markup."
 name = "markupsafe"
 optional = false
@@ -475,7 +475,7 @@ python-versions = ">=3.5"
 version = "8.3.0"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "MessagePack (de)serializer."
 name = "msgpack"
 optional = false
@@ -483,7 +483,7 @@ python-versions = "*"
 version = "1.0.0"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "A network address manipulation library for Python"
 name = "netaddr"
 optional = false
@@ -491,7 +491,7 @@ python-versions = "*"
 version = "0.7.19"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Portable network interface information."
 name = "netifaces"
 optional = false
@@ -499,7 +499,7 @@ python-versions = "*"
 version = "0.10.9"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Oslo Configuration API"
 name = "oslo.config"
 optional = false
@@ -516,7 +516,7 @@ rfc3986 = ">=1.2.0"
 stevedore = ">=1.20.0"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Oslo i18n library"
 name = "oslo.i18n"
 optional = false
@@ -528,7 +528,7 @@ pbr = ">=2.0.0,<2.1.0 || >2.1.0"
 six = ">=1.10.0"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Oslo Serialization library"
 name = "oslo.serialization"
 optional = false
@@ -544,7 +544,7 @@ pbr = ">=2.0.0,<2.1.0 || >2.1.0"
 pytz = ">=2013.6"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Oslo Utility library"
 name = "oslo.utils"
 optional = false
@@ -575,7 +575,7 @@ pyparsing = ">=2.0.2"
 six = "*"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Python Build Reasonableness"
 name = "pbr"
 optional = false
@@ -599,7 +599,7 @@ version = ">=0.12"
 dev = ["pre-commit", "tox"]
 
 [[package]]
-category = "main"
+category = "dev"
 description = "A simple Python library for easily displaying tabular data in a visually appealing ASCII table format."
 name = "prettytable"
 optional = false
@@ -607,7 +607,7 @@ python-versions = "*"
 version = "0.7.2"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "psycopg2 - Python-PostgreSQL Database Adapter"
 name = "psycopg2"
 optional = false
@@ -623,7 +623,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "1.8.1"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "C parser in Python"
 name = "pycparser"
 optional = false
@@ -631,7 +631,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "2.20"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "JSON Web Token implementation in Python"
 name = "pyjwt"
 optional = false
@@ -644,7 +644,7 @@ flake8 = ["flake8", "flake8-import-order", "pep8-naming"]
 test = ["pytest (>=4.0.1,<5.0.0)", "pytest-cov (>=2.6.0,<3.0.0)", "pytest-runner (>=4.2,<5.0.0)"]
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Python parsing module"
 name = "pyparsing"
 optional = false
@@ -678,7 +678,7 @@ checkqa-mypy = ["mypy (v0.761)"]
 testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "requests", "xmlschema"]
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Client Library for OpenStack Identity"
 name = "python-keystoneclient"
 optional = false
@@ -702,7 +702,7 @@ six = ">=1.9.0"
 stevedore = ">=1.5.0"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "World timezone definitions, modern and historical"
 name = "pytz"
 optional = false
@@ -710,7 +710,7 @@ python-versions = "*"
 version = "2020.1"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "YAML parser and emitter for Python"
 name = "pyyaml"
 optional = false
@@ -747,7 +747,7 @@ version = "1.4.0"
 idna2008 = ["idna"]
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Python 2 and 3 compatibility utilities"
 name = "six"
 optional = false
@@ -763,7 +763,7 @@ python-versions = ">=3.5"
 version = "1.1.0"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Database Abstraction Library"
 name = "sqlalchemy"
 optional = false
@@ -783,7 +783,7 @@ postgresql_psycopg2cffi = ["psycopg2cffi"]
 pymysql = ["pymysql"]
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Various utility functions for SQLAlchemy."
 name = "sqlalchemy-utils"
 optional = false
@@ -810,7 +810,7 @@ timezone = ["python-dateutil"]
 url = ["furl (>=0.4.1)"]
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Manage dynamic plugins for Python applications"
 name = "stevedore"
 optional = false
@@ -850,7 +850,7 @@ python-versions = "*"
 version = "0.2.3"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "The comprehensive WSGI web application library."
 name = "werkzeug"
 optional = false
@@ -863,7 +863,7 @@ termcolor = ["termcolor"]
 watchdog = ["watchdog"]
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Module for decorators, wrappers and monkey patching."
 name = "wrapt"
 optional = false
@@ -871,7 +871,7 @@ python-versions = "*"
 version = "1.12.1"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Makes working with XML feel like you are working with JSON"
 name = "xmltodict"
 optional = false
@@ -892,7 +892,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "aed4f73f6ecbe107c7c349c0c362617fcdb44ae177f5f7ffc045bb7086e9bcef"
+content-hash = "eb6bf646373495affce40b098784f6539e01d310e5d4509bea11499a64764f74"
 python-versions = "^3.7"
 
 [metadata.files]
