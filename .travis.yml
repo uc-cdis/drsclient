@@ -9,7 +9,6 @@ env:
 install:
 - pip install poetry
 - poetry install -v
-- poetry show --tree
 script: poetry run py.test -vv
 before_deploy:
 - sed -i.bak "s/=get_version()/='$TRAVIS_TAG'/g" setup.py
