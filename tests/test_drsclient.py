@@ -2,7 +2,6 @@ import json
 import pytest
 import uuid
 import requests
-import requests_mock
 from drsclient import __version__
 from drsclient.client import DrsClient
 import asyncio
