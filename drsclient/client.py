@@ -39,6 +39,7 @@ class SyncClient(httpx.Client):
 def json_dumps(data):
     return json.dumps({k: v for (k, v) in data.items() if v is not None})
 
+
 def timeout_wrapper(func):
     def timeout(*args, **kwargs):
         kwargs.setdefault("timeout", 60)
@@ -83,7 +84,9 @@ class DrsClient(object):
 
     async def async_get(self, did, expand=False):
         params = {"expand": expand}
-        response = await self._get_bundle(httpx.AsyncClient, "index", did, params=params)
+        response = await self._get_bundle(
+            httpx.AsyncClient, "index", did, params=params
+        )
         return response
 
     def create(
@@ -163,12 +166,7 @@ class DrsClient(object):
         Args:
             guid (str): guid to be deleted
         """
-        response = self._delete_bundle(
-            SyncClient, 
-            "bundle",
-            guid,
-            auth=self.auth,
-        )
+        response = self._delete_bundle(SyncClient, "bundle", guid, auth=self.auth,)
         return response
 
     async def async_delete(self, guid):
@@ -179,10 +177,7 @@ class DrsClient(object):
             guid (str): guid to be deleted
         """
         response = await self._delete_bundle(
-            httpx.AsyncClient,
-            "bundle",
-            guid,
-            auth=self.auth,
+            httpx.AsyncClient, "bundle", guid, auth=self.auth,
         )
         return response
 
