@@ -39,18 +39,6 @@ class SyncClient(httpx.Client):
 def json_dumps(data):
     return json.dumps({k: v for (k, v) in data.items() if v is not None})
 
-
-def handle_error(resp):
-    if 400 <= resp.status_code < 600:
-        try:
-            json = resp.json()
-            resp.reason = json["error"]
-        except (json.decoder.JSONDecodeError, KeyError):
-            pass
-        finally:
-            resp.raise_for_status()
-
-
 def timeout_wrapper(func):
     def timeout(*args, **kwargs):
         kwargs.setdefault("timeout", 60)
@@ -86,15 +74,16 @@ class DrsClient(object):
     def check_status(self):
         """Check that the API we are trying to communicate with is online"""
         resp = httpx.get(self.url + "/index")
-        handle_error(resp)
         return resp
 
-    def get(self, did):
-        response = self._get_bundle(SyncClient, "bundle", did)
+    def get(self, did, expand=False):
+        params = {"expand": expand}
+        response = self._get_bundle(SyncClient, "bundle", did, params=params)
         return response
 
-    async def async_get(self, did):
-        response = await self._get_bundle(httpx.AsyncClient, "index", did)
+    async def async_get(self, did, expand=False):
+        params = {"expand": expand}
+        response = await self._get_bundle(httpx.AsyncClient, "index", did, params=params)
         return response
 
     def create(
@@ -160,7 +149,7 @@ class DrsClient(object):
 
         response = await self._post_bundle(
             httpx.AsyncClient,
-            "index/bundle",
+            "bundle",
             headers={"content-type": "application/json"},
             data=json_dumps(json),
             auth=self.auth,
@@ -175,7 +164,10 @@ class DrsClient(object):
             guid (str): guid to be deleted
         """
         response = self._delete_bundle(
-            SyncClient, "index/bundle", guid, headers={"Authorization": self.auth}
+            SyncClient, 
+            "bundle",
+            guid,
+            auth=self.auth,
         )
         return response
 
@@ -188,9 +180,9 @@ class DrsClient(object):
         """
         response = await self._delete_bundle(
             httpx.AsyncClient,
-            "index/bundle",
+            "bundle",
             guid,
-            headers={"Authorization": self.auth},
+            auth=self.auth,
         )
         return response
 
@@ -198,25 +190,22 @@ class DrsClient(object):
     async def _get_bundle(self, client_cls, *path, **kwargs):
         async with client_cls() as client:
             resp = await client.get(self.url_for(*path), **kwargs)
-            handle_error(resp)
             return resp
 
     @maybe_sync
     async def _post_bundle(self, client_cls, *path, **kwargs):
         async with client_cls() as client:
             resp = await client.post(self.url_for(*path), **kwargs)
-            handle_error(resp)
             return resp
 
     @maybe_sync
     async def _delete_bundle(self, client_cls, *path, **kwargs):
         async with client_cls() as client:
             resp = await client.delete(self.url_for(*path), **kwargs)
-            handle_error(resp)
             return resp
 
 
-class Bundle(object):
+class Document(object):
     def __init__(self, client, did, json=None):
         self.client = client
         self.did = did
