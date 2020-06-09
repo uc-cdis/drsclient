@@ -7,7 +7,8 @@ env:
   - PIPENV_IGNORE_VIRTUALENVS=1
   - secure: mLm9xvmW1+w0StFnkgCxE/OE9Ov6MCzb0eU8dZyANZCNKAMBCNIq2hKnySoaH9TN9vU8CGVxdCBSSC8B6BQ/kgTnpU/ZPevMKs1lPuvKSp1XJFW5dfx5YlKuBTNz/JegWhD9kOX3fbMm87e0wfMTCMpzjOZRPZSx15zIfMir1g9xTGB+dKazkGoQmiDrSpu4W0/UOGp0Ni3ISwAGt8lQ2wtZCQ6+vsPvdBnnSXWIS60MHzYIxxWbIPCDw21EcLJJH6IZyMpdWVfcYz3/Tsd4vtJGS9d3WXRpJqCrMUzdh1py/rzhiyh6LoqYsYIfge9sI/MYZ5TcCwS+jE42iL4k2WIVwWOANnc/kDo8RntEfx8+IxxbUHikogab0iaqj64xGhXbi5OzWnVTZZP2G17jcBL/Dxfa/OPltyLMuJRzrL/woaMJAQPv7sDqsuuaPJA1J8Ez+ZVqCVHVECrNyH+vgR2hi7w7Hp68Z9bDRTYvcBZ87WC/AaDIaHlAhUQt5CffBeIhAhHuh9WlHUcnrg7PbCruJ9yRJfy/glDJagEsvTHw7lVhlKNJPbioyH6iV5EYhAynNI/42ihh54PhOZ7jQLidfmBdiGIc6K5wgd8j/anReUqzy1HBNvK9J5itVnhbopY0ukjNkXKJ/aH7SDZAJnUpyPxsw8AIueIzzvpzMI0=
 install:
-- curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+- curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py
+- python get-poetry.py
 - poetry install -v
 script: poetry run pytest -vv tests/
 before_deploy:
