@@ -198,12 +198,3 @@ class DrsClient(object):
         async with client_cls() as client:
             resp = await client.delete(self.url_for(*path), **kwargs)
             return resp
-
-
-class Document(object):
-    def __init__(self, client, did, json=None):
-        self.client = client
-        self.did = did
-        self._fetched = False
-        self._deleted = False
-        self._load(json)
