@@ -13,6 +13,7 @@ asyncio = "^3.4.3"
 backoff = "^1.10.0"
 uuid = "^1.30"
 jsonschema = "2.5.1"
+indexd = {git = "https://github.com/uc-cdis/indexd.git", rev = "bundles"}
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

@@ -77,20 +77,77 @@ class DrsClient(object):
         resp = httpx.get(self.url + "/index")
         return resp
 
-    def get(self, did, expand=False):
+    def get(self, did, endpoint="/ga4gh/drs/v1/objects", expand=False):
         params = {"expand": expand}
-        response = self._get_bundle(SyncClient, "bundle", did, params=params)
+        response = self._get(SyncClient, endpoint, did, params=params)
         return response
 
-    async def async_get(self, did, expand=False):
+    async def async_get(self, did, endpoint="/ga4gh/drs/v1/objects", expand=False):
         params = {"expand": expand}
-        response = await self._get_bundle(
-            httpx.AsyncClient, "index", did, params=params
-        )
+        response = await self._get(httpx.AsyncClient, endpoint, did, params=params)
+        return response
+
+    def get_all(
+        self,
+        endpoint="/ga4gh/drs/v1/objects",
+        start=None,
+        limit=None,
+        page=None,
+        form=None,
+    ):
+        """
+        Get a list of bundle, object or both.
+
+        Args:
+            endpoint (str): pick between '/ga4gh/drs/v1/objects', 'bundle' or 'index' endpoint.
+            form (str): pick between 'bundle', 'object' or 'all' to return any one of them.  
+        """
+        params = {}
+
+        if start:
+            params["start"] = start
+        if limit:
+            params["limit"] = limit
+        if page:
+            params["page"] = page
+        if form:
+            params["form"] = form
+
+        response = self._get(SyncClient, endpoint, params=params)
+        return response
+
+    async def async_get_all(
+        self,
+        endpoint="/ga4gh/drs/v1/objects",
+        start=None,
+        limit=None,
+        page=None,
+        form=None,
+    ):
+        params = {}
+
+        if start:
+            params["start"] = start
+        if limit:
+            params["limit"] = limit
+        if page:
+            params["page"] = page
+        if form:
+            params["form"] = form
+
+        response = await self._get(httpx.AsyncClient, endpoint, params=params)
         return response
 
     def create(
-        self, bundles, name=None, guid=None, size=None, checksums=None,
+        self,
+        bundles,
+        name=None,
+        guid=None,
+        size=None,
+        checksums=None,
+        description=None,
+        version=None,
+        aliases=None,
     ):
         """
         Create a new bundle.
@@ -101,6 +158,9 @@ class DrsClient(object):
             bundles (list): required list of bundle ids and object guids to add in the bundle
             size (int): optional but if not provided indexd calculates it
             checksums (list): list of checksums with type. Optional but if not provided indexd caluclates it
+            description (str): optional description of the bundle object
+            version (str): optional version of the bundle object
+            aliases (list): optional list of aliases related to the bundle
         """
         json = {}
         if bundles is None:
@@ -114,6 +174,12 @@ class DrsClient(object):
             json["name"] = name
         if checksums:
             json["checksum"] = checksums
+        if description:
+            json["description"] = description
+        if version:
+            json["version"] = version
+        if aliases:
+            json["aliases"] = aliases
 
         response = self._post_bundle(
             SyncClient,
@@ -125,7 +191,15 @@ class DrsClient(object):
         return response
 
     async def async_create(
-        self, bundles, name=None, guid=None, size=None, checksums=None,
+        self,
+        bundles,
+        name=None,
+        guid=None,
+        size=None,
+        checksums=None,
+        description=None,
+        version=None,
+        aliases=None,
     ):
         """
         Asynchronously Create a new bundle.
@@ -136,6 +210,9 @@ class DrsClient(object):
             bundles (list): required list of bundle ids and object guids to add in the bundle
             size (int): optional but if not provided indexd calculates it
             checksums (list): list of checksums with type. Optional but if not provided indexd caluclates it
+            description (str): optional description of the bundle object
+            version (str): optional version of the bundle object
+            aliases (list): optional list of aliases related to the bundle
         """
         json = {}
         if bundles is None:
@@ -149,6 +226,12 @@ class DrsClient(object):
             json["name"] = name
         if checksums:
             json["checksum"] = checksums
+        if description:
+            json["description"] = description
+        if version:
+            json["version"] = version
+        if aliases:
+            json["aliases"] = aliases
 
         response = await self._post_bundle(
             httpx.AsyncClient,
@@ -182,7 +265,7 @@ class DrsClient(object):
         return response
 
     @maybe_sync
-    async def _get_bundle(self, client_cls, *path, **kwargs):
+    async def _get(self, client_cls, *path, **kwargs):
         async with client_cls() as client:
             resp = await client.get(self.url_for(*path), **kwargs)
             return resp

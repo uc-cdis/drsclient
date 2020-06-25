@@ -1,5 +1,5 @@
 [[package]]
-category = "dev"
+category = "main"
 description = "Addict is a dictionary whose items can be set using both attribute and item syntax."
 name = "addict"
 optional = false
@@ -7,7 +7,7 @@ python-versions = "*"
 version = "2.2.1"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Python command-line parsing library"
 name = "argparse"
 optional = false
@@ -46,7 +46,7 @@ docs = ["sphinx", "zope.interface"]
 tests = ["coverage", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "zope.interface"]
 
 [[package]]
-category = "dev"
+category = "main"
 description = "The ultimate Python library in building OAuth and OpenID Connect servers."
 name = "authlib"
 optional = false
@@ -60,7 +60,7 @@ cryptography = "*"
 client = ["requests"]
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Gen3 auth utility functions"
 name = "authutils"
 optional = false
@@ -81,7 +81,7 @@ requests = ">=2.6,<3.0"
 xmltodict = ">=0.9,<1.0"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Internationalization utilities"
 name = "babel"
 optional = false
@@ -100,7 +100,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 version = "1.10.0"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "A decorator for caching properties in classes."
 name = "cached-property"
 optional = false
@@ -108,7 +108,7 @@ python-versions = "*"
 version = "1.5.1"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "The auth system for the gdcapi."
 name = "cdiserrors"
 optional = false
@@ -121,7 +121,7 @@ Werkzeug = "*"
 cdislogging = ">=0.0.2"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Standardized logging tool and format for cdis applications"
 name = "cdislogging"
 optional = false
@@ -140,16 +140,17 @@ version = "0.2.4"
 reference = "bdfdeb05e45407e839fd954ce6d195d847cd8024"
 type = "git"
 url = "https://github.com/uc-cdis/cdisutils-test.git"
+
 [[package]]
 category = "main"
 description = "Python package for providing Mozilla's CA Bundle."
 name = "certifi"
 optional = false
 python-versions = "*"
-version = "2020.4.5.1"
+version = "2020.6.20"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Foreign Function Interface for Python calling C code."
 name = "cffi"
 optional = false
@@ -168,7 +169,7 @@ python-versions = "*"
 version = "3.0.4"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Composable command line interface toolkit"
 name = "click"
 optional = false
@@ -185,7 +186,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 version = "0.4.3"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "cryptography is a package which provides cryptographic recipes and primitives to Python developers."
 name = "cryptography"
 optional = false
@@ -204,7 +205,7 @@ pep8test = ["flake8", "flake8-import-order", "pep8-naming"]
 test = ["pytest (>=3.6.0,<3.9.0 || >3.9.0,<3.9.1 || >3.9.1,<3.9.2 || >3.9.2)", "pretend", "iso8601", "pytz", "hypothesis (>=1.11.4,<3.79.2 || >3.79.2)"]
 
 [[package]]
-category = "dev"
+category = "main"
 description = "A collection of Python deprecation patterns and strategies that help you collect your technical debt in a non-destructive manner."
 name = "debtcollector"
 optional = false
@@ -217,7 +218,7 @@ six = ">=1.10.0"
 wrapt = ">=1.7.0"
 
 [[package]]
-category = "dev"
+category = "main"
 description = ""
 name = "doiclient"
 optional = false
@@ -231,8 +232,9 @@ requests = ">=2.5.2,<3.0.0"
 reference = "1a5f4b2a0b04577f31f3dcec511ade117d9f4ba1"
 type = "git"
 url = "https://github.com/uc-cdis/doiclient.git"
+
 [[package]]
-category = "dev"
+category = "main"
 description = ""
 name = "dosclient"
 optional = false
@@ -246,8 +248,9 @@ requests = ">=2.5.2,<3.0.0"
 reference = "38c0f1ab42edf3efb1ad6348d7dbdff81b131360"
 type = "git"
 url = "https://github.com/uc-cdis/dosclient.git"
+
 [[package]]
-category = "dev"
+category = "main"
 description = "A simple framework for building complex web applications."
 name = "flask"
 optional = false
@@ -266,12 +269,12 @@ docs = ["sphinx", "pallets-sphinx-themes", "sphinxcontrib-log-cabinet", "sphinx-
 dotenv = ["python-dotenv"]
 
 [[package]]
-category = "dev"
-description = "Gen3 RBAC Client"
-name = "gen3rbac"
+category = "main"
+description = "Gen3 authz client"
+name = "gen3authz"
 optional = false
 python-versions = "*"
-version = "0.1.2"
+version = "0.4.0"
 
 [package.dependencies]
 backoff = ">=1.6,<2.0"
@@ -307,7 +310,7 @@ python-versions = "*"
 version = "3.0.0"
 
 [[package]]
-category = "dev"
+category = "main"
 description = ""
 name = "hsclient"
 optional = false
@@ -321,13 +324,14 @@ requests = ">=2.5.2,<3.0.0"
 reference = "f122072ee245216da5e4260f718d6f886db81773"
 type = "git"
 url = "https://github.com/uc-cdis/hsclient.git"
+
 [[package]]
 category = "main"
 description = "Chromium HSTS Preload list as a Python package and updated daily"
 name = "hstspreload"
 optional = false
 python-versions = ">=3.6"
-version = "2020.6.5"
+version = "2020.6.23"
 
 [[package]]
 category = "main"
@@ -381,7 +385,7 @@ docs = ["sphinx", "rst.linker"]
 testing = ["packaging", "pep517", "importlib-resources (>=1.3)"]
 
 [[package]]
-category = "dev"
+category = "main"
 description = ""
 name = "indexclient"
 optional = false
@@ -392,7 +396,7 @@ version = "2.1.0"
 requests = ">=2.5.2,<3.0.0"
 
 [[package]]
-category = "dev"
+category = "main"
 description = ""
 name = "indexd"
 optional = false
@@ -400,12 +404,12 @@ python-versions = "*"
 version = "0.1"
 
 [package.dependencies]
-authutils = "*"
+authutils = "4.0.0"
 cdislogging = ">=0.0.2"
 doiclient = "*"
 dosclient = "*"
 flask = "1.1.1"
-gen3rbac = "*"
+gen3authz = ">=0.4.0,<0.5.0"
 hsclient = "*"
 indexclient = "*"
 jsonschema = "2.5.1"
@@ -414,11 +418,11 @@ sqlalchemy = "1.3.3"
 sqlalchemy-utils = ">=0.33.11"
 
 [package.source]
-reference = "23f53982d71210a402c90c3431d9a5b16f2f1c4e"
+reference = "9c16bc82880e93e168b59e6928d09349862f764e"
 type = "git"
 url = "https://github.com/uc-cdis/indexd.git"
 [[package]]
-category = "dev"
+category = "main"
 description = "Simple module to parse ISO 8601 dates"
 name = "iso8601"
 optional = false
@@ -426,7 +430,7 @@ python-versions = "*"
 version = "0.1.12"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Various helpers to pass data to untrusted environments and back."
 name = "itsdangerous"
 optional = false
@@ -434,7 +438,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "1.1.0"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "A very fast and expressive template engine."
 name = "jinja2"
 optional = false
@@ -459,7 +463,7 @@ version = "2.5.1"
 format = ["rfc3987", "strict-rfc3339", "webcolors"]
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Safely add untrusted strings to HTML/XML markup."
 name = "markupsafe"
 optional = false
@@ -472,10 +476,10 @@ description = "More routines for operating on iterables, beyond itertools"
 name = "more-itertools"
 optional = false
 python-versions = ">=3.5"
-version = "8.3.0"
+version = "8.4.0"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "MessagePack (de)serializer."
 name = "msgpack"
 optional = false
@@ -483,15 +487,15 @@ python-versions = "*"
 version = "1.0.0"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "A network address manipulation library for Python"
 name = "netaddr"
 optional = false
 python-versions = "*"
-version = "0.7.19"
+version = "0.7.20"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Portable network interface information."
 name = "netifaces"
 optional = false
@@ -499,12 +503,12 @@ python-versions = "*"
 version = "0.10.9"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Oslo Configuration API"
 name = "oslo.config"
 optional = false
 python-versions = ">=3.6"
-version = "8.1.0"
+version = "8.2.0"
 
 [package.dependencies]
 PyYAML = ">=3.12"
@@ -516,7 +520,7 @@ rfc3986 = ">=1.2.0"
 stevedore = ">=1.20.0"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Oslo i18n library"
 name = "oslo.i18n"
 optional = false
@@ -528,28 +532,26 @@ pbr = ">=2.0.0,<2.1.0 || >2.1.0"
 six = ">=1.10.0"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Oslo Serialization library"
 name = "oslo.serialization"
 optional = false
 python-versions = ">=3.6"
-version = "3.2.0"
+version = "4.0.0"
 
 [package.dependencies]
-PyYAML = ">=3.12"
-debtcollector = ">=1.2.0"
 msgpack = ">=0.5.2"
 "oslo.utils" = ">=3.33.0"
 pbr = ">=2.0.0,<2.1.0 || >2.1.0"
 pytz = ">=2013.6"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Oslo Utility library"
 name = "oslo.utils"
 optional = false
 python-versions = ">=3.6"
-version = "4.2.0"
+version = "4.2.1"
 
 [package.dependencies]
 debtcollector = ">=1.2.0"
@@ -575,7 +577,7 @@ pyparsing = ">=2.0.2"
 six = "*"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Python Build Reasonableness"
 name = "pbr"
 optional = false
@@ -599,7 +601,7 @@ version = ">=0.12"
 dev = ["pre-commit", "tox"]
 
 [[package]]
-category = "dev"
+category = "main"
 description = "A simple Python library for easily displaying tabular data in a visually appealing ASCII table format."
 name = "prettytable"
 optional = false
@@ -607,7 +609,7 @@ python-versions = "*"
 version = "0.7.2"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "psycopg2 - Python-PostgreSQL Database Adapter"
 name = "psycopg2"
 optional = false
@@ -620,10 +622,10 @@ description = "library with cross-python path, ini-parsing, io, code, log facili
 name = "py"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "1.8.1"
+version = "1.8.2"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "C parser in Python"
 name = "pycparser"
 optional = false
@@ -631,7 +633,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "2.20"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "JSON Web Token implementation in Python"
 name = "pyjwt"
 optional = false
@@ -644,7 +646,7 @@ flake8 = ["flake8", "flake8-import-order", "pep8-naming"]
 test = ["pytest (>=4.0.1,<5.0.0)", "pytest-cov (>=2.6.0,<3.0.0)", "pytest-runner (>=4.2,<5.0.0)"]
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Python parsing module"
 name = "pyparsing"
 optional = false
@@ -678,7 +680,7 @@ checkqa-mypy = ["mypy (v0.761)"]
 testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "requests", "xmlschema"]
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Client Library for OpenStack Identity"
 name = "python-keystoneclient"
 optional = false
@@ -702,7 +704,7 @@ six = ">=1.9.0"
 stevedore = ">=1.5.0"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "World timezone definitions, modern and historical"
 name = "pytz"
 optional = false
@@ -710,7 +712,7 @@ python-versions = "*"
 version = "2020.1"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "YAML parser and emitter for Python"
 name = "pyyaml"
 optional = false
@@ -723,7 +725,7 @@ description = "Python HTTP for Humans."
 name = "requests"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
-version = "2.23.0"
+version = "2.24.0"
 
 [package.dependencies]
 certifi = ">=2017.4.17"
@@ -747,7 +749,7 @@ version = "1.4.0"
 idna2008 = ["idna"]
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Python 2 and 3 compatibility utilities"
 name = "six"
 optional = false
@@ -763,7 +765,7 @@ python-versions = ">=3.5"
 version = "1.1.0"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Database Abstraction Library"
 name = "sqlalchemy"
 optional = false
@@ -783,7 +785,7 @@ postgresql_psycopg2cffi = ["psycopg2cffi"]
 pymysql = ["pymysql"]
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Various utility functions for SQLAlchemy."
 name = "sqlalchemy-utils"
 optional = false
@@ -810,12 +812,12 @@ timezone = ["python-dateutil"]
 url = ["furl (>=0.4.1)"]
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Manage dynamic plugins for Python applications"
 name = "stevedore"
 optional = false
 python-versions = ">=3.6"
-version = "2.0.0"
+version = "2.0.1"
 
 [package.dependencies]
 pbr = ">=2.0.0,<2.1.0 || >2.1.0"
@@ -847,10 +849,10 @@ description = "Measures the displayed width of unicode strings in a terminal"
 name = "wcwidth"
 optional = false
 python-versions = "*"
-version = "0.2.3"
+version = "0.2.5"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "The comprehensive WSGI web application library."
 name = "werkzeug"
 optional = false
@@ -863,7 +865,7 @@ termcolor = ["termcolor"]
 watchdog = ["watchdog"]
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Module for decorators, wrappers and monkey patching."
 name = "wrapt"
 optional = false
@@ -871,7 +873,7 @@ python-versions = "*"
 version = "1.12.1"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Makes working with XML feel like you are working with JSON"
 name = "xmltodict"
 optional = false
@@ -892,7 +894,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "3285a8cd4438c18d7f4f2c707db99e9f1393b1340e902f2922cb12708a4e1a37"
+content-hash = "8a5fcb8f84be6f03234f874e2764271ecfbf6965d818ff49061344b45f9a3f61"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -945,8 +947,8 @@ cdislogging = [
 ]
 cdisutilstest = []
 certifi = [
-    {file = "certifi-2020.4.5.1-py2.py3-none-any.whl", hash = "sha256:1d987a998c75633c40847cc966fcf5904906c920a7f17ef374f5aa4282abd304"},
-    {file = "certifi-2020.4.5.1.tar.gz", hash = "sha256:51fcb31174be6e6664c5f69e3e1691a2d72a1a12e90f872cbdb1567eb47b6519"},
+    {file = "certifi-2020.6.20-py2.py3-none-any.whl", hash = "sha256:8fc0819f1f30ba15bdb34cceffb9ef04d99f420f68eb75d901e9560b8749fc41"},
+    {file = "certifi-2020.6.20.tar.gz", hash = "sha256:5930595817496dd21bb8dc35dad090f1c2cd0adfaf21204bf6732ca5d8ee34d3"},
 ]
 cffi = [
     {file = "cffi-1.14.0-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:1cae98a7054b5c9391eb3249b86e0e99ab1e02bb0cc0575da191aedadbdf4384"},
@@ -1021,8 +1023,8 @@ flask = [
     {file = "Flask-1.1.1-py2.py3-none-any.whl", hash = "sha256:45eb5a6fd193d6cf7e0cf5d8a5b31f83d5faae0293695626f539a823e93b13f6"},
     {file = "Flask-1.1.1.tar.gz", hash = "sha256:13f9f196f330c7c2c5d7a5cf91af894110ca0215ac051b5844701f2bfd934d52"},
 ]
-gen3rbac = [
-    {file = "gen3rbac-0.1.2.tar.gz", hash = "sha256:7c7991dae60f6004a53e5f4d9692f566df9e824099666ed647023509de9389b4"},
+gen3authz = [
+    {file = "gen3authz-0.4.0.tar.gz", hash = "sha256:5a74ce9f5ab875fe936557ed77b6d09e80ad6eccafd24cbea3b588304449279f"},
 ]
 h11 = [
     {file = "h11-0.9.0-py2.py3-none-any.whl", hash = "sha256:4bc6d6a1238b7615b266ada57e0618568066f57dd6fa967d1290ec9309b2f2f1"},
@@ -1038,8 +1040,8 @@ hpack = [
 ]
 hsclient = []
 hstspreload = [
-    {file = "hstspreload-2020.6.5-py3-none-any.whl", hash = "sha256:9850f199a4678bbc6a392255948d2435b706bc8a7e40df0f84ac2f7348cf4195"},
-    {file = "hstspreload-2020.6.5.tar.gz", hash = "sha256:2858151b4f77322c6a61312abccead20217b1169ae0855753c0da45da2049329"},
+    {file = "hstspreload-2020.6.23-py3-none-any.whl", hash = "sha256:8eb6a839c39d0995bfac3213dc08de780bb3d4d4386d9958ea29d86f20fd3659"},
+    {file = "hstspreload-2020.6.23.tar.gz", hash = "sha256:4c55cb73ebe3549277a4e5e5a95867350cd3888ebe09d41f61a42718e4a3909e"},
 ]
 httpx = [
     {file = "httpx-0.12.1-py3-none-any.whl", hash = "sha256:ce51c8e8ed2834447fde5a94650299fd74017b7da69cc786b6421fefda09a393"},
@@ -1115,8 +1117,8 @@ markupsafe = [
     {file = "MarkupSafe-1.1.1.tar.gz", hash = "sha256:29872e92839765e546828bb7754a68c418d927cd064fd4708fab9fe9c8bb116b"},
 ]
 more-itertools = [
-    {file = "more-itertools-8.3.0.tar.gz", hash = "sha256:558bb897a2232f5e4f8e2399089e35aecb746e1f9191b6584a151647e89267be"},
-    {file = "more_itertools-8.3.0-py3-none-any.whl", hash = "sha256:7818f596b1e87be009031c7653d01acc46ed422e6656b394b0f765ce66ed4982"},
+    {file = "more-itertools-8.4.0.tar.gz", hash = "sha256:68c70cc7167bdf5c7c9d8f6954a7837089c6a36bf565383919bb595efb8a17e5"},
+    {file = "more_itertools-8.4.0-py3-none-any.whl", hash = "sha256:b78134b2063dd214000685165d81c154522c3ee0a1c0d4d113c80361c234c5a2"},
 ]
 msgpack = [
     {file = "msgpack-1.0.0-cp35-cp35m-manylinux1_i686.whl", hash = "sha256:cec8bf10981ed70998d98431cd814db0ecf3384e6b113366e7f36af71a0fca08"},
@@ -1139,8 +1141,8 @@ msgpack = [
     {file = "msgpack-1.0.0.tar.gz", hash = "sha256:9534d5cc480d4aff720233411a1f765be90885750b07df772380b34c10ecb5c0"},
 ]
 netaddr = [
-    {file = "netaddr-0.7.19-py2.py3-none-any.whl", hash = "sha256:56b3558bd71f3f6999e4c52e349f38660e54a7a8a9943335f73dfc96883e08ca"},
-    {file = "netaddr-0.7.19.tar.gz", hash = "sha256:38aeec7cdd035081d3a4c306394b19d677623bf76fa0913f6695127c7753aefd"},
+    {file = "netaddr-0.7.20-py2.py3-none-any.whl", hash = "sha256:7a9c8f58d048b820df1882439bb04fb2de13c03ec8af3112a1099822b0a2a4b8"},
+    {file = "netaddr-0.7.20.tar.gz", hash = "sha256:d09252e5aec3913815d77eb8e8ea8fa6eb33521253e52f977f6abaa964776f3e"},
 ]
 netifaces = [
     {file = "netifaces-0.10.9-cp27-cp27m-macosx_10_13_x86_64.whl", hash = "sha256:b2ff3a0a4f991d2da5376efd3365064a43909877e9fabfa801df970771161d29"},
@@ -1167,20 +1169,20 @@ netifaces = [
     {file = "netifaces-0.10.9.tar.gz", hash = "sha256:2dee9ffdd16292878336a58d04a20f0ffe95555465fee7c9bd23b3490ef2abf3"},
 ]
 "oslo.config" = [
-    {file = "oslo.config-8.1.0-py3-none-any.whl", hash = "sha256:d4f2fad86b24d14b0c5b473bcbd5fc2043f4d33aaad8138c8ae3f537268dd815"},
-    {file = "oslo.config-8.1.0.tar.gz", hash = "sha256:f4c4068d547ea53289fa5526680901380bb2cc6de5b8b7862ef5fd6b7e3ad7d9"},
+    {file = "oslo.config-8.2.0-py3-none-any.whl", hash = "sha256:457fd3456d8a544d344c73545852a406d2e31b0a18e33f596bb141eb946eff96"},
+    {file = "oslo.config-8.2.0.tar.gz", hash = "sha256:116ff3a7b98b0309b083af7906d99f8c6bea67df5ee03a85e2ac02700dd75d30"},
 ]
 "oslo.i18n" = [
     {file = "oslo.i18n-5.0.0-py3-none-any.whl", hash = "sha256:55914fbdcb7de1d766bc3910c61b5071fe1288ba605bfe90f635000a033c4ec4"},
     {file = "oslo.i18n-5.0.0.tar.gz", hash = "sha256:2e71ae3ec73a74ac71f8f407e6653243dc267eed404624255a296c34f1fc6887"},
 ]
 "oslo.serialization" = [
-    {file = "oslo.serialization-3.2.0-py3-none-any.whl", hash = "sha256:164bcd119ece8d6df4ec14fdbfbc976d7acd17115d0b1c3e7a0ebc9303a17df2"},
-    {file = "oslo.serialization-3.2.0.tar.gz", hash = "sha256:ab88054f9de6dfd79080441d70a2441d9050d7d567cb7ffc8383ca549b4ded0e"},
+    {file = "oslo.serialization-4.0.0-py3-none-any.whl", hash = "sha256:292bf1eac8930d9d89a64f8c7b3871eb2cfc990078b89c432edfe863da0df3d9"},
+    {file = "oslo.serialization-4.0.0.tar.gz", hash = "sha256:f465df171be564282cb3e86ec895f5b6ae5e5b0760e9af2be96a942a5255a860"},
 ]
 "oslo.utils" = [
-    {file = "oslo.utils-4.2.0-py3-none-any.whl", hash = "sha256:874810127d31fc69c9b5a7d89ffafe323356d41adacbf2497472dff8c99f35a8"},
-    {file = "oslo.utils-4.2.0.tar.gz", hash = "sha256:c2973ea0da83ff4e6becbf399aa3053c8fe8935747510d84a6350bed272b6d8b"},
+    {file = "oslo.utils-4.2.1-py3-none-any.whl", hash = "sha256:c4a2693d32f92d01295bc3044980b6e429f3c26dc4758177fd6492db8081239a"},
+    {file = "oslo.utils-4.2.1.tar.gz", hash = "sha256:4231498577d575053df8d05338127728226d862d98863a7c4e03ebcca55d72ad"},
 ]
 packaging = [
     {file = "packaging-20.4-py2.py3-none-any.whl", hash = "sha256:998416ba6962ae7fbd6596850b80e17859a5753ba17c32284f67bfff33784181"},
@@ -1215,8 +1217,8 @@ psycopg2 = [
     {file = "psycopg2-2.8.5.tar.gz", hash = "sha256:f7d46240f7a1ae1dd95aab38bd74f7428d46531f69219954266d669da60c0818"},
 ]
 py = [
-    {file = "py-1.8.1-py2.py3-none-any.whl", hash = "sha256:c20fdd83a5dbc0af9efd622bee9a5564e278f6380fffcacc43ba6f43db2813b0"},
-    {file = "py-1.8.1.tar.gz", hash = "sha256:5e27081401262157467ad6e7f851b7aa402c5852dbcb3dae06768434de5752aa"},
+    {file = "py-1.8.2-py2.py3-none-any.whl", hash = "sha256:a673fa23d7000440cc885c17dbd34fafcb7d7a6e230b29f6766400de36a33c44"},
+    {file = "py-1.8.2.tar.gz", hash = "sha256:f3b3a4c36512a4c4f024041ab51866f11761cc169670204b235f6b20523d4e6b"},
 ]
 pycparser = [
     {file = "pycparser-2.20-py2.py3-none-any.whl", hash = "sha256:7582ad22678f0fcd81102833f60ef8d0e57288b6b5fb00323d101be910e35705"},
@@ -1256,8 +1258,8 @@ pyyaml = [
     {file = "PyYAML-5.3.1.tar.gz", hash = "sha256:b8eac752c5e14d3eca0e6dd9199cd627518cb5ec06add0de9d32baeee6fe645d"},
 ]
 requests = [
-    {file = "requests-2.23.0-py2.py3-none-any.whl", hash = "sha256:43999036bfa82904b6af1d99e4882b560e5e2c68e5c4b0aa03b655f3d7d73fee"},
-    {file = "requests-2.23.0.tar.gz", hash = "sha256:b3f43d496c6daba4493e7c431722aeb7dbc6288f52a6e04e7b6023b0247817e6"},
+    {file = "requests-2.24.0-py2.py3-none-any.whl", hash = "sha256:fe75cc94a9443b9246fc7049224f75604b113c36acb93f87b80ed42c44cbb898"},
+    {file = "requests-2.24.0.tar.gz", hash = "sha256:b3559a131db72c33ee969480840fff4bb6dd111de7dd27c8ee1f820f4f00231b"},
 ]
 rfc3986 = [
     {file = "rfc3986-1.4.0-py2.py3-none-any.whl", hash = "sha256:af9147e9aceda37c91a05f4deb128d4b4b49d6b199775fd2d2927768abdc8f50"},
@@ -1278,8 +1280,8 @@ sqlalchemy-utils = [
     {file = "SQLAlchemy-Utils-0.36.6.tar.gz", hash = "sha256:7a7fab14bed80df065412bbf71a0a9b0bfeb4b7c111c2d9bffe57283082f3a6b"},
 ]
 stevedore = [
-    {file = "stevedore-2.0.0-py3-none-any.whl", hash = "sha256:471c920412265cc809540ae6fb01f3f02aba89c79bbc7091372f4745a50f9691"},
-    {file = "stevedore-2.0.0.tar.gz", hash = "sha256:001e90cd704be6470d46cc9076434e2d0d566c1379187e7013eb296d3a6032d9"},
+    {file = "stevedore-2.0.1-py3-none-any.whl", hash = "sha256:c4724f8d7b8f6be42130663855d01a9c2414d6046055b5a65ab58a0e38637688"},
+    {file = "stevedore-2.0.1.tar.gz", hash = "sha256:609912b87df5ad338ff8e44d13eaad4f4170a65b79ae9cb0aa5632598994a1b7"},
 ]
 urllib3 = [
     {file = "urllib3-1.25.9-py2.py3-none-any.whl", hash = "sha256:88206b0eb87e6d677d424843ac5209e3fb9d0190d0ee169599165ec25e9d9115"},
@@ -1289,8 +1291,8 @@ uuid = [
     {file = "uuid-1.30.tar.gz", hash = "sha256:1f87cc004ac5120466f36c5beae48b4c48cc411968eed0eaecd3da82aa96193f"},
 ]
 wcwidth = [
-    {file = "wcwidth-0.2.3-py2.py3-none-any.whl", hash = "sha256:980fbf4f3c196c0f329cdcd1e84c554d6a211f18e252e525a0cf4223154a41d6"},
-    {file = "wcwidth-0.2.3.tar.gz", hash = "sha256:edbc2b718b4db6cdf393eefe3a420183947d6aa312505ce6754516f458ff8830"},
+    {file = "wcwidth-0.2.5-py2.py3-none-any.whl", hash = "sha256:beb4802a9cebb9144e99086eff703a642a13d6a0052920003a230f3294bbe784"},
+    {file = "wcwidth-0.2.5.tar.gz", hash = "sha256:c4d647b99872929fdb7bdcaa4fbe7f01413ed3d98077df798530e5b04f116c83"},
 ]
 werkzeug = [
     {file = "Werkzeug-0.16.1-py2.py3-none-any.whl", hash = "sha256:1e0dedc2acb1f46827daa2e399c1485c8fa17c0d8e70b6b875b4e7f54bf408d2"},
