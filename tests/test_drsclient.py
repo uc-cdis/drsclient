@@ -56,7 +56,7 @@ def test_check_status(index_client, drs_client):
 def test_post_index(index_client, drs_client):
     rec = create_index_record(index_client)
     did = rec["did"]
-    res2 = drs_client.get(did=did)
+    res2 = drs_client.get(guid=did)
     assert res2.status_code == 200
 
 
@@ -85,7 +85,7 @@ def test_async_create_bundle(index_client, drs_client):
 def test_get_drs_record(index_client, drs_client):
     rec = create_index_record(index_client)
     did = rec["did"]
-    res2 = drs_client.get(did=did)
+    res2 = drs_client.get(guid=did)
     assert res2.status_code == 200
 
 

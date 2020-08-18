@@ -77,14 +77,14 @@ class DrsClient(object):
         resp = httpx.get(self.url + "/index")
         return resp
 
-    def get(self, did, endpoint="/ga4gh/drs/v1/objects", expand=False):
+    def get(self, guid, endpoint="/ga4gh/drs/v1/objects", expand=False):
         params = {"expand": expand}
-        response = self._get(SyncClient, endpoint, did, params=params)
+        response = self._get(SyncClient, endpoint, guid, params=params)
         return response
 
-    async def async_get(self, did, endpoint="/ga4gh/drs/v1/objects", expand=False):
+    async def async_get(self, guid, endpoint="/ga4gh/drs/v1/objects", expand=False):
         params = {"expand": expand}
-        response = await self._get(httpx.AsyncClient, endpoint, did, params=params)
+        response = await self._get(httpx.AsyncClient, endpoint, guid, params=params)
         return response
 
     def get_all(
@@ -264,6 +264,8 @@ class DrsClient(object):
         )
         return response
 
+    # TODO: function to get presigned url. Add both sync and async. Protocol options
+    #       get_access_url
     @maybe_sync
     async def _get(self, client_cls, *path, **kwargs):
         async with client_cls() as client:
