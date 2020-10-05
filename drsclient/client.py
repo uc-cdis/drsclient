@@ -100,7 +100,7 @@ class DrsClient(object):
 
         Args:
             endpoint (str): pick between '/ga4gh/drs/v1/objects', 'bundle' or 'index' endpoint.
-            form (str): pick between 'bundle', 'object' or 'all' to return any one of them.  
+            form (str): pick between 'bundle', 'object' or 'all' to return any one of them.
         """
         params = {}
 
@@ -154,7 +154,7 @@ class DrsClient(object):
 
         Args:
             name (str): optional but if not provided will default to guid
-            guid (str): optional but if not provided indexd crerates one 
+            guid (str): optional but if not provided indexd crerates one
             bundles (list): required list of bundle ids and object guids to add in the bundle
             size (int): optional but if not provided indexd calculates it
             checksums (list): list of checksums with type. Optional but if not provided indexd caluclates it
@@ -206,7 +206,7 @@ class DrsClient(object):
 
         Args:
             name (str): optional but if not provided will default to guid
-            guid (str): optional but if not provided indexd crerates one 
+            guid (str): optional but if not provided indexd crerates one
             bundles (list): required list of bundle ids and object guids to add in the bundle
             size (int): optional but if not provided indexd calculates it
             checksums (list): list of checksums with type. Optional but if not provided indexd caluclates it
@@ -249,7 +249,12 @@ class DrsClient(object):
         Args:
             guid (str): guid to be deleted
         """
-        response = self._delete_bundle(SyncClient, "bundle", guid, auth=self.auth,)
+        response = self._delete_bundle(
+            SyncClient,
+            "bundle",
+            guid,
+            auth=self.auth,
+        )
         return response
 
     async def async_delete(self, guid):
@@ -260,7 +265,10 @@ class DrsClient(object):
             guid (str): guid to be deleted
         """
         response = await self._delete_bundle(
-            httpx.AsyncClient, "bundle", guid, auth=self.auth,
+            httpx.AsyncClient,
+            "bundle",
+            guid,
+            auth=self.auth,
         )
         return response
 
