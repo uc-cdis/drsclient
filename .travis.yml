@@ -7,7 +7,6 @@ install:
 - 'curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python'
 - source $HOME/.poetry/env
 - which poetry
-- poetry install -v
 script: poetry run pytest -vv tests/
 before_deploy:
 - poetry config pypi-token.pypi $PYPI_API_TOKEN
