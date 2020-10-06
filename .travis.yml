@@ -8,6 +8,7 @@ install:
 - source $HOME/.poetry/env
 - which poetry
 - poetry install -vv
+- poetry show
 script: poetry run pytest -vv tests/
 before_deploy:
 - poetry config pypi-token.pypi $PYPI_API_TOKEN
