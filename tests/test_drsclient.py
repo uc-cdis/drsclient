@@ -5,6 +5,7 @@ import requests
 from drsclient import __version__
 from drsclient.client import DrsClient
 import asyncio
+import respx
 
 from cdisutilstest.code.indexd_fixture import (
     create_random_index,
@@ -254,3 +255,27 @@ def test_no_id(index_client, drs_client):
     fake_id = "20ihjf2038ehjfv0289"
     res = drs_client.create(bundles=[fake_id])
     assert res.status_code == 404
+
+
+@respx.mock
+def test_access_endpoint(index_client, drs_client):
+    rec = create_index_record(index_client)
+    did = rec["did"]
+    protocol = "s3"
+    full_url = drs_client.url + "/ga4gh/drs/v1/objects/" + did + "/access/" + protocol
+    request = respx.get(full_url, status_code=200)
+    res3 = drs_client.download(did, protocol)
+    assert request.called
+    assert res3.status_code == 200
+
+
+@respx.mock
+def test_async_access_endpoint(index_client, drs_client):
+    rec = create_index_record(index_client)
+    did = rec["did"]
+    protocol = "s3"
+    full_url = drs_client.url + "/ga4gh/drs/v1/objects/" + did + "/access/" + protocol
+    request = respx.get(full_url, status_code=200)
+    res3 = asyncio.run(drs_client.async_download(did, protocol))
+    assert request.called
+    assert res3.status_code == 200

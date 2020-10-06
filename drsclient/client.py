@@ -87,6 +87,16 @@ class DrsClient(object):
         response = await self._get(httpx.AsyncClient, endpoint, guid, params=params)
         return response
 
+    def download(self, guid, protocol, endpoint="/ga4gh/drs/v1/objects"):
+        endpoint += "/" + guid + "/access/" + protocol
+        response = self._get(SyncClient, endpoint)
+        return response
+
+    async def async_download(self, guid, protocol, endpoint="/ga4gh/drs/v1/objects"):
+        endpoint += "/" + guid + "/access/" + protocol
+        response = await self._get(httpx.AsyncClient, endpoint)
+        return response
+
     def get_all(
         self,
         endpoint="/ga4gh/drs/v1/objects",
