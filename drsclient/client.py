@@ -260,7 +260,12 @@ class DrsClient(object):
         Args:
             guid (str): guid to be deleted
         """
-        response = self._delete(SyncClient, "bundle", guid, auth=self.auth,)
+        response = self._delete(
+            SyncClient,
+            "bundle",
+            guid,
+            auth=self.auth,
+        )
         return response
 
     async def async_delete(self, guid):
@@ -271,7 +276,10 @@ class DrsClient(object):
             guid (str): guid to be deleted
         """
         response = await self._delete(
-            httpx.AsyncClient, "bundle", guid, auth=self.auth,
+            httpx.AsyncClient,
+            "bundle",
+            guid,
+            auth=self.auth,
         )
         return response
 
