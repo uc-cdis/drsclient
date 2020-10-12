@@ -1,7 +1,5 @@
 on:
-  pull_request:
-  issue_comment:
-    types: [created, edited]
+  pull_request
 
 name: Wool
 

@@ -1,7 +1,5 @@
 import json
-import warnings
 import httpx
-import backoff
 import asyncio
 import requests
 from functools import wraps
@@ -36,10 +34,6 @@ class SyncClient(httpx.Client):
         return super().request(*args, **kwargs)
 
 
-def json_dumps(data):
-    return json.dumps({k: v for (k, v) in data.items() if v is not None})
-
-
 def timeout_wrapper(func):
     def timeout(*args, **kwargs):
         kwargs.setdefault("timeout", 60)
@@ -72,9 +66,9 @@ class DrsClient(object):
         subpath = "/".join(path).lstrip("/")
         return "{}/{}".format(self.url.rstrip("/"), subpath)
 
-    def check_status(self):
+    def check_status(self, status_endpoint="/index"):
         """Check that the API we are trying to communicate with is online"""
-        resp = httpx.get(self.url + "/index")
+        resp = httpx.get(self.url + status_endpoint)
         return resp
 
     def get(self, guid, endpoint="/ga4gh/drs/v1/objects", expand=False):
@@ -109,7 +103,7 @@ class DrsClient(object):
         Get a list of bundle, object or both.
 
         Args:
-            endpoint (str): pick between '/ga4gh/drs/v1/objects', 'bundle' or 'index' endpoint.
+            endpoint (str): pick between '/ga4gh/drs/v1/objects', 'bundle' or 'index' endpoint. (If calling a Gen3 Indexd instance)
             form (str): pick between 'bundle', 'object' or 'all' to return any one of them.
         """
         params = {}
@@ -134,6 +128,13 @@ class DrsClient(object):
         page=None,
         form=None,
     ):
+        """
+        Get a list of bundle, object or both asynchronously.
+
+        Args:
+            endpoint (str): pick between '/ga4gh/drs/v1/objects', 'bundle' or 'index' endpoint. (If calling a Gen3 Indexd instance)
+            form (str): pick between 'bundle', 'object' or 'all' to return any one of them.
+        """
         params = {}
 
         if start:
@@ -172,30 +173,30 @@ class DrsClient(object):
             version (str): optional version of the bundle object
             aliases (list): optional list of aliases related to the bundle
         """
-        json = {}
+        data = {}
         if bundles is None:
             bundles = []
-        json["bundles"] = bundles
+        data["bundles"] = bundles
         if guid:
-            json["bundle_id"] = guid
+            data["bundle_id"] = guid
         if size:
-            json["size"] = size
+            data["size"] = size
         if name:
-            json["name"] = name
+            data["name"] = name
         if checksums:
-            json["checksum"] = checksums
+            data["checksum"] = checksums
         if description:
-            json["description"] = description
+            data["description"] = description
         if version:
-            json["version"] = version
+            data["version"] = version
         if aliases:
-            json["aliases"] = aliases
+            data["aliases"] = aliases
 
-        response = self._post_bundle(
+        response = self._post(
             SyncClient,
             "bundle",
             headers={"content-type": "application/json"},
-            data=json_dumps(json),
+            data=json.dumps(data),
             auth=self.auth,
         )
         return response
@@ -224,30 +225,30 @@ class DrsClient(object):
             version (str): optional version of the bundle object
             aliases (list): optional list of aliases related to the bundle
         """
-        json = {}
+        data = {}
         if bundles is None:
             bundles = []
-        json["bundles"] = bundles
+        data["bundles"] = bundles
         if guid:
-            json["guid"] = guid
+            data["guid"] = guid
         if size:
-            json["size"] = size
+            data["size"] = size
         if name:
-            json["name"] = name
+            data["name"] = name
         if checksums:
-            json["checksum"] = checksums
+            data["checksum"] = checksums
         if description:
-            json["description"] = description
+            data["description"] = description
         if version:
-            json["version"] = version
+            data["version"] = version
         if aliases:
-            json["aliases"] = aliases
+            data["aliases"] = aliases
 
-        response = await self._post_bundle(
+        response = await self._post(
             httpx.AsyncClient,
             "bundle",
             headers={"content-type": "application/json"},
-            data=json_dumps(json),
+            data=json.dumps(data),
             auth=self.auth,
         )
         return response
@@ -259,12 +260,7 @@ class DrsClient(object):
         Args:
             guid (str): guid to be deleted
         """
-        response = self._delete_bundle(
-            SyncClient,
-            "bundle",
-            guid,
-            auth=self.auth,
-        )
+        response = self._delete(SyncClient, "bundle", guid, auth=self.auth,)
         return response
 
     async def async_delete(self, guid):
@@ -274,30 +270,28 @@ class DrsClient(object):
         Args:
             guid (str): guid to be deleted
         """
-        response = await self._delete_bundle(
-            httpx.AsyncClient,
-            "bundle",
-            guid,
-            auth=self.auth,
+        response = await self._delete(
+            httpx.AsyncClient, "bundle", guid, auth=self.auth,
         )
         return response
 
-    # TODO: function to get presigned url. Add both sync and async. Protocol options
-    #       get_access_url
+    @retry_and_timeout_wrapper
     @maybe_sync
     async def _get(self, client_cls, *path, **kwargs):
         async with client_cls() as client:
             resp = await client.get(self.url_for(*path), **kwargs)
             return resp
 
+    @timeout_wrapper
     @maybe_sync
-    async def _post_bundle(self, client_cls, *path, **kwargs):
+    async def _post(self, client_cls, *path, **kwargs):
         async with client_cls() as client:
             resp = await client.post(self.url_for(*path), **kwargs)
             return resp
 
+    @timeout_wrapper
     @maybe_sync
-    async def _delete_bundle(self, client_cls, *path, **kwargs):
+    async def _delete(self, client_cls, *path, **kwargs):
         async with client_cls() as client:
             resp = await client.delete(self.url_for(*path), **kwargs)
             return resp

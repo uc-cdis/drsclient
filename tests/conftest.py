@@ -12,27 +12,18 @@ from drsclient.client import DrsClient
 
 @pytest.fixture(scope="function")
 def index_client(indexd_client):
-    """
-    Handles getting all the docs from an
-    indexing endpoint. Currently this is changing from
-    signpost to indexd, so we'll use just indexd_client now.
-    I.E. test to a common interface this could be multiply our
-    tests:
-    https://docs.pytest.org/en/latest/fixture.html#parametrizing-fixtures
-    """
     return indexd_client
 
 
 @pytest.fixture(scope="function")
 def drs_client(indexd_server):
     """
-    Returns a IndexClient. This will delete any documents,
+    Returns a DrsClient. This will delete any documents,
     aliases, or users made by this
     client after the test has completed.
     Currently the default user is the admin user
     Runs once per test.
     """
-    # setup_database()
     client = DrsClient(baseurl=indexd_server.baseurl, auth=create_user("user", "user"))
     yield client
     clear_database()
@@ -40,12 +31,4 @@ def drs_client(indexd_server):
 
 @pytest.fixture(scope="function")
 def drsclient(drs_client):
-    """
-    Handles getting all the docs from an
-    indexing endpoint. Currently this is changing from
-    signpost to indexd, so we'll use just indexd_client now.
-    I.E. test to a common interface this could be multiply our
-    tests:
-    https://docs.pytest.org/en/latest/fixture.html#parametrizing-fixtures
-    """
     return drs_client
