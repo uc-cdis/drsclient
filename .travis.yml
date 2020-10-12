@@ -1,0 +1,30 @@
+language: python
+dist: xenial
+python:
+- '3.7'
+sudo: false
+install:
+- curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | POETRY_VERSION=1.0.9 python
+- source $HOME/.poetry/env
+- which poetry
+- poetry install -vv
+- poetry show
+script: poetry run pytest -vv tests/
+before_deploy:
+- poetry config http-basic.pypi $PYPI_USER $PYPI_PASSWORD
+- poetry build -f sdist
+deploy:
+  provider: script
+  script: poetry publish -n -vv
+  skip_cleanup: true
+  on:
+    python: 3.7
+    repo: uc-cdis/drsclient
+    tags: true
+after_deploy:
+- poetry run pip install gen3git
+- poetry run gen3git release
+env:
+  global:
+  - secure: wtl3VgsmS4xVp3j1heWePZ1GqIz/mKRJo6mR0htW8k+xNoDpLFx85DIel9S0mAd4sMJyDhqf6Kq8rrwQRSoOs8KsCjLYMKKlH4zKHeMO7OeJTbEiCLREeAZMIbtMSmc/ZXrthDiK3JuhLFX7ipwwA03P5MsY44CFu82BaEoMUhysYHPKQsY9iHVzZREzysHS00YBP29IkxFtZMXMXFmxPDz0PXrNog3nxMgRt84UJAUGSjGuSKuD8s/mDq6ViFvO8VRbFe9BEPZK3HkimGLjPRfLWudiYIIybNQg+qDR3ggK9SjCz2Te63t7ySfEogD2Sclr8g+6KBKIgtUd+kuJ7GxURMAZtTokzC9k/5JORWyUPtcLBbPrcZwLgHliB/I6BKap4L9Ko37wW/vukRUn2HOnIvc9uQnVooto5mmKrn4j7nxTJqLc8bEmPbNl49fOXgeZLF0gI9HXhH79FEs6PjgatgO9bEjqyL2reA/ydH0IBEYxOwXqJy8AnOKYdqqmnJ0IqtQNnMCwEuvf5ubrzCtV2TQ6C0bjoKF0gCM8Ng04Ih08G5xFc/BcQcP23AlrnEMSfrz4UBLYkQfiHBoPa/F9qS/swpWTai54gZPI1P9ScGfiLEVXaTWYGmC1M8j0T0rb5TbpZ4fLoQ57NwB/EQpGldXBrXp/VvB8cTKhNb0=
+  - secure: VVXbFko+AWV6PB2eUhlZcE58KyBJotY/Hfx84eYKjLCAg+grf2wrb7IMaAqsc0wFBahZ29ysa8ArpZLCyf6/cQJEUAV6tZfh7FChNMhrRVkQTAuGeYA3c3CYMGPF395e83Mk5HaP0cwBqh+11uSp3ZNiGe7bVnS2QNe1JPMqLQuyAsHcJc8HcCpQUAZSyuvrAX+0Or49M0QAnon2FX/5spB5PVooUJatgMjmVvzL2DabiXkDw5YN0xjPrgqLnQJJRsBKYp0tUmSGETE7/Cd32f4pAKu7D0LfVALFnX7qjIuGLy9ANvi+LW99W8N0+EnzqRv41g2Uf4YUmYIAwwlrTVLTK5ANf2ITd7EgIIt3m09MauS8VkqiJczvyr+kENRk/En+2dsfCv0lg4PSgZnJqH6U8BR5Wx8OoUD4UTc/A9bEbSSXNEiutDFOHDw67aME2+fhKuwCwx2jzx7QaN84n+WdGuIqCU/9dGJSOQzzeKccwEs6IrN65nOyBTsunL+ju29oWCWBZoXk2uohRbxtyglPW96T9Xu+vylQy11WLgMIhrIBEZf9vmHpZt7ikUhc9PY/A5BvukOznbv5234/fqxm410HhyrZZJmxbzoYTqyCZZY+sE9VPM0raoEtJXNxDlD9bIoKG+y2HeqtA1gPIWnjtmqmtFLXiyhBu6A5Uqo=

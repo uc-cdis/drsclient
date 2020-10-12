@@ -103,7 +103,3 @@ ENV/
 
 # PyCharm
 .idea/
-
-# Docker db
-postgres-data/
-
