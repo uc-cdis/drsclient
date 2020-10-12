@@ -6,7 +6,7 @@ authors = ["CTDS UChicago <cdis@uchicago.edu>"]
 license = "Apache-2.0"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.6"
 requests = "^2.23.0"
 httpx = "^0.15"
 asyncio = "^3.4.3"
