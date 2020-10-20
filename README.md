@@ -25,11 +25,15 @@ poetry install
 ### Initialization
 To start, initialize the drsclient. There are only two fields required to initialize the client:
 - `baseurl` (required): url of the server we're trying to connect with.
-- `auth` (optional): auth info to access object bytes.
+- `auth` (optional): auth info to access object bytes or POST/DELETE bundles in Gen3 DRS servers.
+- `token` (optional): access token to access object bytes or POST/DELETE bundles in Gen3 DRS servers.
+If using both `auth` and `token` then `auth` takes priority.
 ```python
 from drsclient.client import DrsClient
 
-client = DrsClient(baseurl="somedrsserver.io", auth="some_token")
+client = DrsClient(baseurl="somedrsserver.io", auth=(username, password))
+# OR
+client = DrsClient(baseurl="somedrsserver.io", token="some_token")
 
 ```
 

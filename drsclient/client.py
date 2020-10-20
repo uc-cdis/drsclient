@@ -58,9 +58,10 @@ def retry_and_timeout_wrapper(func):
 
 
 class DrsClient(object):
-    def __init__(self, baseurl, auth=None):
+    def __init__(self, baseurl, auth=None, token=None):
         self.auth = auth
         self.url = baseurl
+        self.token = token
 
     def url_for(self, *path):
         subpath = "/".join(path).lstrip("/")
@@ -101,7 +102,6 @@ class DrsClient(object):
     ):
         """
         Get a list of bundle, object or both.
-
         Args:
             endpoint (str): pick between '/ga4gh/drs/v1/objects', 'bundle' or 'index' endpoint. (If calling a Gen3 Indexd instance)
             form (str): pick between 'bundle', 'object' or 'all' to return any one of them.
@@ -130,7 +130,6 @@ class DrsClient(object):
     ):
         """
         Get a list of bundle, object or both asynchronously.
-
         Args:
             endpoint (str): pick between '/ga4gh/drs/v1/objects', 'bundle' or 'index' endpoint. (If calling a Gen3 Indexd instance)
             form (str): pick between 'bundle', 'object' or 'all' to return any one of them.
@@ -162,7 +161,6 @@ class DrsClient(object):
     ):
         """
         Create a new bundle.
-
         Args:
             name (str): optional but if not provided will default to guid
             guid (str): optional but if not provided indexd crerates one
@@ -197,7 +195,6 @@ class DrsClient(object):
             "bundle",
             headers={"content-type": "application/json"},
             data=json.dumps(data),
-            auth=self.auth,
         )
         return response
 
@@ -214,7 +211,6 @@ class DrsClient(object):
     ):
         """
         Asynchronously Create a new bundle.
-
         Args:
             name (str): optional but if not provided will default to guid
             guid (str): optional but if not provided indexd crerates one
@@ -249,14 +245,12 @@ class DrsClient(object):
             "bundle",
             headers={"content-type": "application/json"},
             data=json.dumps(data),
-            auth=self.auth,
         )
         return response
 
     def delete(self, guid):
         """
         Delete bundle according to the guid.
-
         Args:
             guid (str): guid to be deleted
         """
@@ -264,14 +258,12 @@ class DrsClient(object):
             SyncClient,
             "bundle",
             guid,
-            auth=self.auth,
         )
         return response
 
     async def async_delete(self, guid):
         """
         Delete bundle according to the guid.
-
         Args:
             guid (str): guid to be deleted
         """
@@ -279,14 +271,28 @@ class DrsClient(object):
             httpx.AsyncClient,
             "bundle",
             guid,
-            auth=self.auth,
         )
         return response
+
+    def _check_auth_type(self, **kwargs):
+        """
+        Decide wheather to use either auth or access token
+        """
+        if self.auth:
+            kwargs["auth"] = self.auth
+        elif self.token:
+            access_token = "Bearer " + self.token
+            if "headers" in kwargs:
+                kwargs["headers"]["Authorization"] = access_token
+            else:
+                kwargs["headers"] = {"Authorization": access_token}
+        return kwargs
 
     @retry_and_timeout_wrapper
     @maybe_sync
     async def _get(self, client_cls, *path, **kwargs):
         async with client_cls() as client:
+            kwargs = self._check_auth_type(**kwargs)
             resp = await client.get(self.url_for(*path), **kwargs)
             return resp
 
@@ -294,6 +300,7 @@ class DrsClient(object):
     @maybe_sync
     async def _post(self, client_cls, *path, **kwargs):
         async with client_cls() as client:
+            kwargs = self._check_auth_type(**kwargs)
             resp = await client.post(self.url_for(*path), **kwargs)
             return resp
 
@@ -301,5 +308,6 @@ class DrsClient(object):
     @maybe_sync
     async def _delete(self, client_cls, *path, **kwargs):
         async with client_cls() as client:
+            kwargs = self._check_auth_type(**kwargs)
             resp = await client.delete(self.url_for(*path), **kwargs)
             return resp
