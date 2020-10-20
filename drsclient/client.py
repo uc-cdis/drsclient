@@ -58,9 +58,10 @@ def retry_and_timeout_wrapper(func):
 
 
 class DrsClient(object):
-    def __init__(self, baseurl, auth=None):
+    def __init__(self, baseurl, auth=None, token=None):
         self.auth = auth
         self.url = baseurl
+        self.token = token
 
     def url_for(self, *path):
         subpath = "/".join(path).lstrip("/")
@@ -82,13 +83,19 @@ class DrsClient(object):
         return response
 
     def download(self, guid, protocol, endpoint="/ga4gh/drs/v1/objects"):
+        headers = {}
+        if self.token:
+            headers["Authorization"] = "Bearer " + self.token
         endpoint += "/" + guid + "/access/" + protocol
-        response = self._get(SyncClient, endpoint)
+        response = self._get(SyncClient, endpoint, headers=headers)
         return response
 
     async def async_download(self, guid, protocol, endpoint="/ga4gh/drs/v1/objects"):
+        headers = {}
+        if self.token:
+            headers["Authorization"] = "Bearer " + self.token
         endpoint += "/" + guid + "/access/" + protocol
-        response = await self._get(httpx.AsyncClient, endpoint)
+        response = await self._get(httpx.AsyncClient, endpoint, headers=headers)
         return response
 
     def get_all(
@@ -174,6 +181,7 @@ class DrsClient(object):
             aliases (list): optional list of aliases related to the bundle
         """
         data = {}
+        headers = {"content-type": "application/json"}
         if bundles is None:
             bundles = []
         data["bundles"] = bundles
@@ -191,11 +199,13 @@ class DrsClient(object):
             data["version"] = version
         if aliases:
             data["aliases"] = aliases
+        if self.token:
+            headers["Authorization"] = "Bearer " + self.token
 
         response = self._post(
             SyncClient,
             "bundle",
-            headers={"content-type": "application/json"},
+            headers=headers,
             data=json.dumps(data),
             auth=self.auth,
         )
@@ -226,6 +236,7 @@ class DrsClient(object):
             aliases (list): optional list of aliases related to the bundle
         """
         data = {}
+        headers = {"content-type": "application/json"}
         if bundles is None:
             bundles = []
         data["bundles"] = bundles
@@ -243,11 +254,13 @@ class DrsClient(object):
             data["version"] = version
         if aliases:
             data["aliases"] = aliases
+        if self.token:
+            headers["Authorization"] = "Bearer " + self.token
 
         response = await self._post(
             httpx.AsyncClient,
             "bundle",
-            headers={"content-type": "application/json"},
+            headers=headers,
             data=json.dumps(data),
             auth=self.auth,
         )
@@ -260,11 +273,15 @@ class DrsClient(object):
         Args:
             guid (str): guid to be deleted
         """
+        headers = {}
+        if self.token:
+            headers["Authorization"] = "Bearer " + self.token
         response = self._delete(
             SyncClient,
             "bundle",
             guid,
             auth=self.auth,
+            headers=headers,
         )
         return response
 
@@ -275,11 +292,15 @@ class DrsClient(object):
         Args:
             guid (str): guid to be deleted
         """
+        headers = {}
+        if self.token:
+            headers["Authorization"] = "Bearer " + self.token
         response = await self._delete(
             httpx.AsyncClient,
             "bundle",
             guid,
             auth=self.auth,
+            headers=headers,
         )
         return response
 
