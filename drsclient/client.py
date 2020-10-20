@@ -83,19 +83,13 @@ class DrsClient(object):
         return response
 
     def download(self, guid, protocol, endpoint="/ga4gh/drs/v1/objects"):
-        headers = {}
-        if self.token:
-            headers["Authorization"] = "Bearer " + self.token
         endpoint += "/" + guid + "/access/" + protocol
-        response = self._get(SyncClient, endpoint, headers=headers)
+        response = self._get(SyncClient, endpoint)
         return response
 
     async def async_download(self, guid, protocol, endpoint="/ga4gh/drs/v1/objects"):
-        headers = {}
-        if self.token:
-            headers["Authorization"] = "Bearer " + self.token
         endpoint += "/" + guid + "/access/" + protocol
-        response = await self._get(httpx.AsyncClient, endpoint, headers=headers)
+        response = await self._get(httpx.AsyncClient, endpoint)
         return response
 
     def get_all(
@@ -108,7 +102,6 @@ class DrsClient(object):
     ):
         """
         Get a list of bundle, object or both.
-
         Args:
             endpoint (str): pick between '/ga4gh/drs/v1/objects', 'bundle' or 'index' endpoint. (If calling a Gen3 Indexd instance)
             form (str): pick between 'bundle', 'object' or 'all' to return any one of them.
@@ -137,7 +130,6 @@ class DrsClient(object):
     ):
         """
         Get a list of bundle, object or both asynchronously.
-
         Args:
             endpoint (str): pick between '/ga4gh/drs/v1/objects', 'bundle' or 'index' endpoint. (If calling a Gen3 Indexd instance)
             form (str): pick between 'bundle', 'object' or 'all' to return any one of them.
@@ -169,7 +161,6 @@ class DrsClient(object):
     ):
         """
         Create a new bundle.
-
         Args:
             name (str): optional but if not provided will default to guid
             guid (str): optional but if not provided indexd crerates one
@@ -181,7 +172,6 @@ class DrsClient(object):
             aliases (list): optional list of aliases related to the bundle
         """
         data = {}
-        headers = {"content-type": "application/json"}
         if bundles is None:
             bundles = []
         data["bundles"] = bundles
@@ -199,15 +189,12 @@ class DrsClient(object):
             data["version"] = version
         if aliases:
             data["aliases"] = aliases
-        if self.token:
-            headers["Authorization"] = "Bearer " + self.token
 
         response = self._post(
             SyncClient,
             "bundle",
-            headers=headers,
+            headers={"content-type": "application/json"},
             data=json.dumps(data),
-            auth=self.auth,
         )
         return response
 
@@ -224,7 +211,6 @@ class DrsClient(object):
     ):
         """
         Asynchronously Create a new bundle.
-
         Args:
             name (str): optional but if not provided will default to guid
             guid (str): optional but if not provided indexd crerates one
@@ -236,7 +222,6 @@ class DrsClient(object):
             aliases (list): optional list of aliases related to the bundle
         """
         data = {}
-        headers = {"content-type": "application/json"}
         if bundles is None:
             bundles = []
         data["bundles"] = bundles
@@ -254,60 +239,60 @@ class DrsClient(object):
             data["version"] = version
         if aliases:
             data["aliases"] = aliases
-        if self.token:
-            headers["Authorization"] = "Bearer " + self.token
 
         response = await self._post(
             httpx.AsyncClient,
             "bundle",
-            headers=headers,
+            headers={"content-type": "application/json"},
             data=json.dumps(data),
-            auth=self.auth,
         )
         return response
 
     def delete(self, guid):
         """
         Delete bundle according to the guid.
-
         Args:
             guid (str): guid to be deleted
         """
-        headers = {}
-        if self.token:
-            headers["Authorization"] = "Bearer " + self.token
         response = self._delete(
             SyncClient,
             "bundle",
             guid,
-            auth=self.auth,
-            headers=headers,
         )
         return response
 
     async def async_delete(self, guid):
         """
         Delete bundle according to the guid.
-
         Args:
             guid (str): guid to be deleted
         """
-        headers = {}
-        if self.token:
-            headers["Authorization"] = "Bearer " + self.token
         response = await self._delete(
             httpx.AsyncClient,
             "bundle",
             guid,
-            auth=self.auth,
-            headers=headers,
         )
         return response
+
+    def _check_auth_type(self, **kwargs):
+        """
+        Decide wheather to use either auth or access token
+        """
+        if self.auth:
+            kwargs["auth"] = self.auth
+        elif self.token:
+            access_token = "Bearer " + self.token
+            if "headers" in kwargs:
+                kwargs["headers"]["Authorization"] = access_token
+            else:
+                kwargs["headers"] = {"Authorization": access_token}
+        return kwargs
 
     @retry_and_timeout_wrapper
     @maybe_sync
     async def _get(self, client_cls, *path, **kwargs):
         async with client_cls() as client:
+            kwargs = self._check_auth_type(**kwargs)
             resp = await client.get(self.url_for(*path), **kwargs)
             return resp
 
@@ -315,6 +300,7 @@ class DrsClient(object):
     @maybe_sync
     async def _post(self, client_cls, *path, **kwargs):
         async with client_cls() as client:
+            kwargs = self._check_auth_type(**kwargs)
             resp = await client.post(self.url_for(*path), **kwargs)
             return resp
 
@@ -322,5 +308,6 @@ class DrsClient(object):
     @maybe_sync
     async def _delete(self, client_cls, *path, **kwargs):
         async with client_cls() as client:
+            kwargs = self._check_auth_type(**kwargs)
             resp = await client.delete(self.url_for(*path), **kwargs)
             return resp
