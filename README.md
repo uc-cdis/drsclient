@@ -54,7 +54,9 @@ client.create(
 
 #### Method: `async_create`
 ```python
-asyncio.run(client.async_create(
+loop = asyncio.get_event_loop()
+
+loop.run_until_complete(client.async_create(
     bundles=["object1", "bundle1", ...], # required list of bundles and objects to bundle
     name="bundle_name", # optional
     guid="bundleA", # optional
@@ -75,8 +77,10 @@ client.get(guid="bundle1", expand=True) # expand parameter for bundle expansion
 
 #### Method: `async_get`
 ```python
-asyncio.run(client.get(guid="object1"))
-asyncio.run(client.get(guid="bundle1", expand=True)) # expand parameter for bundle expansion
+loop = asyncio.get_event_loop()
+
+loop.run_until_complete(client.get(guid="object1"))
+loop.run_until_complete(client.get(guid="bundle1", expand=True)) # expand parameter for bundle expansion
 ```
 
 ### Get all objects
@@ -87,7 +91,9 @@ client.get_all()
 
 #### Method: `async_get_all`
 ```python
-asyncio.run(client.async_get_all())
+loop = asyncio.get_event_loop()
+
+loop.run_until_complete(client.async_get_all())
 ```
 
 ### Download object bytes
@@ -98,7 +104,9 @@ client.download(guid="object1", protocol="s3") # protocol parameter to specify c
 
 #### Method: `async_download`
 ```python
-asyncio.run(client.async_download(guid="object1", protocol="s3")) # protocol parameter to specify cloud storage type
+loop = asyncio.get_event_loop()
+
+loop.run_until_complete(client.async_download(guid="object1", protocol="s3")) # protocol parameter to specify cloud storage type
 ```
 
 ### Delete bundles
@@ -109,5 +117,7 @@ client.delete(guid="bundle")
 
 ### Method: `async_delete`
 ```python
-asyncio.run(client.async_delete(guid="bundle"))
+loop = asyncio.get_event_loop()
+
+loop.run_until_complete(client.async_delete(guid="bundle"))
 ```

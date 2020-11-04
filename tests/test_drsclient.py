@@ -61,8 +61,9 @@ def test_create_bundle(index_client, drs_client, async_client):
     """
     rec = create_index_record(index_client)
     did = rec["did"]
+    loop = asyncio.get_event_loop()
     res1 = (
-        asyncio.run(drs_client.async_create(bundles=[did]))
+        loop.run_until_complete(drs_client.async_create(bundles=[did]))
         if async_client
         else drs_client.create(bundles=[did])
     )
@@ -80,8 +81,9 @@ def test_get_drs_record(index_client, drs_client, async_client):
     """
     rec = create_index_record(index_client)
     did = rec["did"]
+    loop = asyncio.get_event_loop()
     res2 = (
-        asyncio.run(drs_client.async_get(guid=did))
+        loop.run_until_complete(drs_client.async_get(guid=did))
         if async_client
         else drs_client.get(guid=did)
     )
@@ -117,8 +119,9 @@ def test_get_bundle(index_client, drs_client, async_client):
     rec1 = res1.json()
     assert res1.status_code == 200
     bundle_id = rec1["bundle_id"]
+    loop = asyncio.get_event_loop()
     res2 = (
-        asyncio.run(drs_client.async_get(bundle_id, "bundle", expand=True))
+        loop.run_until_complete(drs_client.async_get(bundle_id, "bundle", expand=True))
         if async_client
         else drs_client.get(bundle_id, "bundle", expand=True)
     )
@@ -133,7 +136,7 @@ def test_get_bundle(index_client, drs_client, async_client):
 
     # get with /ga4gh/drs/v1/objects endpoint
     rec3 = (
-        asyncio.run(drs_client.async_get(bundle_id, expand=True))
+        loop.run_until_complete(drs_client.async_get(bundle_id, expand=True))
         if async_client
         else drs_client.get(bundle_id, expand=True)
     )
@@ -157,8 +160,10 @@ def test_get_all(index_client, drs_client, async_client):
         rec = create_index_record(index_client)
         drs_client.create(bundles=[rec["did"]])
 
+    loop = asyncio.get_event_loop()
+
     res1 = (
-        asyncio.run(drs_client.async_get_all(limit=300))
+        loop.run_until_complete(drs_client.async_get_all(limit=300))
         if async_client
         else drs_client.get_all(limit=300)
     )
@@ -167,7 +172,7 @@ def test_get_all(index_client, drs_client, async_client):
     assert len(rec1["drs_objects"]) == 200
 
     res2 = (
-        asyncio.run(drs_client.async_get_all(form="bundle", limit=300))
+        loop.run_until_complete(drs_client.async_get_all(form="bundle", limit=300))
         if async_client
         else drs_client.get_all(form="bundle", limit=300)
     )
@@ -176,7 +181,7 @@ def test_get_all(index_client, drs_client, async_client):
     assert len(rec2["drs_objects"]) == 100
 
     res3 = (
-        asyncio.run(drs_client.async_get_all(form="object", limit=300))
+        loop.run_until_complete(drs_client.async_get_all(form="object", limit=300))
         if async_client
         else drs_client.get_all(form="object", limit=300)
     )
@@ -196,8 +201,10 @@ def test_delete_bundle(index_client, drs_client, async_client):
     rec1 = res1.json()
     bundle_id = rec1["bundle_id"]
     assert res1.status_code == 200
+    loop = asyncio.get_event_loop()
+
     res2 = (
-        asyncio.run(drs_client.async_delete(bundle_id))
+        loop.run_until_complete(drs_client.async_delete(bundle_id))
         if async_client
         else drs_client.delete(bundle_id)
     )
@@ -217,8 +224,10 @@ def test_access_endpoint(index_client, drs_client, async_client):
     protocol = "s3"
     full_url = drs_client.url + "/ga4gh/drs/v1/objects/" + did + "/access/" + protocol
     request = respx.get(full_url, status_code=200)
+    loop = asyncio.get_event_loop()
+
     res3 = (
-        asyncio.run(drs_client.async_download(did, protocol))
+        loop.run_until_complete(drs_client.async_download(did, protocol))
         if async_client
         else drs_client.download(did, protocol)
     )
