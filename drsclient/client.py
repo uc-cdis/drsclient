@@ -166,7 +166,7 @@ class DrsClient(object):
             guid (str): optional but if not provided indexd crerates one
             bundles (list): required list of bundle ids and object guids to add in the bundle
             size (int): optional but if not provided indexd calculates it
-            checksums (list): list of checksums with type. Optional but if not provided indexd caluclates it
+            checksums (list): list of checksums with type in the form [{"checksums": "somehash1234", "type":"md5"}]. Optional, if not provided indexd automatically calculates an md5 checksum
             description (str): optional description of the bundle object
             version (str): optional version of the bundle object
             aliases (list): optional list of aliases related to the bundle
@@ -182,7 +182,7 @@ class DrsClient(object):
         if name:
             data["name"] = name
         if checksums:
-            data["checksum"] = checksums
+            data["checksums"] = checksums
         if description:
             data["description"] = description
         if version:
@@ -216,7 +216,7 @@ class DrsClient(object):
             guid (str): optional but if not provided indexd crerates one
             bundles (list): required list of bundle ids and object guids to add in the bundle
             size (int): optional but if not provided indexd calculates it
-            checksums (list): list of checksums with type. Optional but if not provided indexd caluclates it
+            checksums (list): list of checksums with type in the form [{"checksums": "somehash1234", "type":"md5"}]. Optional but if not provided indexd caluclates it
             description (str): optional description of the bundle object
             version (str): optional version of the bundle object
             aliases (list): optional list of aliases related to the bundle
@@ -226,13 +226,13 @@ class DrsClient(object):
             bundles = []
         data["bundles"] = bundles
         if guid:
-            data["guid"] = guid
+            data["bundle_id"] = guid
         if size:
             data["size"] = size
         if name:
             data["name"] = name
         if checksums:
-            data["checksum"] = checksums
+            data["checksums"] = checksums
         if description:
             data["description"] = description
         if version:

@@ -45,7 +45,7 @@ client.create(
     name="bundle_name", # optional
     guid="bundleA", # optional
     size=500, # optional
-    checksums="checksum", # optional
+    checksums=[{"checksum":"somehash1234", "type":"md5"}], # optional
     description="description". # optional
     version="abc123", # optional
     aliases=["A", "B"] #optional
@@ -61,7 +61,7 @@ loop.run_until_complete(client.async_create(
     name="bundle_name", # optional
     guid="bundleA", # optional
     size=500, # optional
-    checksums="checksum", # optional
+    checksums=[{"checksum":"somehash1234", "type":"md5"}], # optional
     description="description". # optional
     version="abc123", # optional
     aliases=["A", "B"] #optional
