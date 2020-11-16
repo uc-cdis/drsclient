@@ -166,7 +166,7 @@ class DrsClient(object):
             guid (str): optional but if not provided indexd crerates one
             bundles (list): required list of bundle ids and object guids to add in the bundle
             size (int): optional but if not provided indexd calculates it
-            checksums (list): list of checksums with type. Optional but if not provided indexd caluclates it
+            checksums (list): list of checksums with type in the form [{"checksums": "somehash1234", "type":"md5"}]. Optional but if not provided indexd caluclates it
             description (str): optional description of the bundle object
             version (str): optional version of the bundle object
             aliases (list): optional list of aliases related to the bundle
@@ -216,7 +216,7 @@ class DrsClient(object):
             guid (str): optional but if not provided indexd crerates one
             bundles (list): required list of bundle ids and object guids to add in the bundle
             size (int): optional but if not provided indexd calculates it
-            checksums (list): list of checksums with type. Optional but if not provided indexd caluclates it
+            checksums (list): list of checksums with type in the form [{"checksums": "somehash1234", "type":"md5"}]. Optional but if not provided indexd caluclates it
             description (str): optional description of the bundle object
             version (str): optional version of the bundle object
             aliases (list): optional list of aliases related to the bundle
