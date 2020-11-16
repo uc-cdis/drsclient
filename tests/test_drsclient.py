@@ -75,6 +75,74 @@ def test_create_bundle(index_client, drs_client, async_client):
 
 
 @pytest.mark.parametrize("async_client", [True, False])
+def test_create_bundle_with_optional_fields(index_client, drs_client, async_client):
+    """
+    Test to create bundle with optional fields checksums and size
+    """
+    rec = create_index_record(index_client)
+    did = rec["did"]
+    size = 10
+    bundle_id = str(uuid.uuid4())
+    checksums = [
+        {
+            "checksum": "bc52d6bfe3ac965e069109dbd7d15e0ccaaa55678f6e2a6664bee2edf8ae1b2b",  # pragma: allowlist secret
+            "type": "sha256",
+        },
+        {
+            "checksum": "a8f5f167f44f4964e6c998dee827110c",  # pragma: allowlist secret
+            "type": "md5",
+        },
+    ]
+    loop = asyncio.get_event_loop()
+    res1 = (
+        loop.run_until_complete(
+            drs_client.async_create(
+                bundles=[did], guid=bundle_id, checksums=checksums, size=size
+            )
+        )
+        if async_client
+        else drs_client.create(
+            bundles=[did], guid=bundle_id, checksums=checksums, size=size
+        )
+    )
+    assert res1.status_code == 200
+    rec1 = res1.json()
+    res2 = drs_client.get(bundle_id)
+    rec2 = res2.json()
+    for checksum in rec2["checksums"]:
+        assert checksum in checksums
+    assert rec2["size"] == size
+
+
+@pytest.mark.parametrize("async_client", [True, False])
+def test_create_bundle_with_incorrect_optional_fields(
+    index_client, drs_client, async_client
+):
+    """
+    Test to create bundle using incorrect checksums
+    """
+    rec = create_index_record(index_client)
+    did = rec["did"]
+    bundle_id = str(uuid.uuid4())
+    checksums = [
+        {
+            "checksum": "bc52d6bfe3ac965e069109dbd7d15e0ccaaa55678f6e2a6664bee2edf8ae1b2basd",
+            "type": "sha256",
+        },
+        {"checksum": "a8f5f167f44f4964e6c998dee827110casdsa", "type": "md5"},
+    ]
+    loop = asyncio.get_event_loop()
+    res1 = (
+        loop.run_until_complete(
+            drs_client.async_create(bundles=[did], guid=bundle_id, checksums=checksums)
+        )
+        if async_client
+        else drs_client.create(bundles=[did], guid=bundle_id, checksums=checksums)
+    )
+    assert res1.status_code == 400
+
+
+@pytest.mark.parametrize("async_client", [True, False])
 def test_get_drs_record(index_client, drs_client, async_client):
     """
     Test to get a drs record using both sync and async method.

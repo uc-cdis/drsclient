@@ -182,7 +182,7 @@ class DrsClient(object):
         if name:
             data["name"] = name
         if checksums:
-            data["checksum"] = checksums
+            data["checksums"] = checksums
         if description:
             data["description"] = description
         if version:
@@ -226,13 +226,13 @@ class DrsClient(object):
             bundles = []
         data["bundles"] = bundles
         if guid:
-            data["guid"] = guid
+            data["bundle_id"] = guid
         if size:
             data["size"] = size
         if name:
             data["name"] = name
         if checksums:
-            data["checksum"] = checksums
+            data["checksums"] = checksums
         if description:
             data["description"] = description
         if version:
