@@ -34,14 +34,6 @@ class SyncClient(httpx.Client):
         return super().request(*args, **kwargs)
 
 
-def timeout_wrapper(func):
-    def timeout(*args, **kwargs):
-        kwargs.setdefault("timeout", 60)
-        return func(*args, **kwargs)
-
-    return timeout
-
-
 def retry_and_timeout_wrapper(func):
     def retry_logic_with_timeout(*args, **kwargs):
         kwargs.setdefault("timeout", 60)
