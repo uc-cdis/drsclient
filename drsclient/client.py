@@ -34,14 +34,6 @@ class SyncClient(httpx.Client):
         return super().request(*args, **kwargs)
 
 
-def timeout_wrapper(func):
-    def timeout(*args, **kwargs):
-        kwargs.setdefault("timeout", 60)
-        return func(*args, **kwargs)
-
-    return timeout
-
-
 def retry_and_timeout_wrapper(func):
     def retry_logic_with_timeout(*args, **kwargs):
         kwargs.setdefault("timeout", 60)
@@ -296,7 +288,7 @@ class DrsClient(object):
             resp = await client.get(self.url_for(*path), **kwargs)
             return resp
 
-    @timeout_wrapper
+    @retry_and_timeout_wrapper
     @maybe_sync
     async def _post(self, client_cls, *path, **kwargs):
         async with client_cls() as client:
@@ -304,7 +296,7 @@ class DrsClient(object):
             resp = await client.post(self.url_for(*path), **kwargs)
             return resp
 
-    @timeout_wrapper
+    @retry_and_timeout_wrapper
     @maybe_sync
     async def _delete(self, client_cls, *path, **kwargs):
         async with client_cls() as client:
