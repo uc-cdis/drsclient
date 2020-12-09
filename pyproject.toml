@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "drsclient"
-version = "0.1.3"
+version = "0.1.4"
 description = "GA4GH DRS Client"
 authors = ["CTDS UChicago <cdis@uchicago.edu>"]
 license = "Apache-2.0"
