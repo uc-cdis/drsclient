@@ -296,7 +296,7 @@ class DrsClient(object):
             resp = await client.get(self.url_for(*path), **kwargs)
             return resp
 
-    @timeout_wrapper
+    @retry_and_timeout_wrapper
     @maybe_sync
     async def _post(self, client_cls, *path, **kwargs):
         async with client_cls() as client:
@@ -304,7 +304,7 @@ class DrsClient(object):
             resp = await client.post(self.url_for(*path), **kwargs)
             return resp
 
-    @timeout_wrapper
+    @retry_and_timeout_wrapper
     @maybe_sync
     async def _delete(self, client_cls, *path, **kwargs):
         async with client_cls() as client:
