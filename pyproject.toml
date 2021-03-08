@@ -7,7 +7,7 @@ license = "Apache-2.0"
 
 [tool.poetry.dependencies]
 python = "^3.6"
-requests = "^2.23.0"
+requests = "^2.23.1"
 httpx = "^0.15"
 asyncio = "^3.4.3"
 backoff = "^1.10.0"
