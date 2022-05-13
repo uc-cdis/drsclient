@@ -1,9 +1,13 @@
 language: python
 dist: xenial
 python:
-- '3.6'
-- '3.8'
-- '3.9'
+- 3.6
+- 3.8
+- 3.9
+jobs:
+  allow_failures:
+  - python: 3.6
+  - python: 3.8
 sudo: false
 install:
 - curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | POETRY_VERSION=1.1.12 python
