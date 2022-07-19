@@ -2,6 +2,7 @@ import json
 import uuid
 import asyncio
 import respx
+import httpx
 import pytest
 
 
@@ -291,7 +292,7 @@ def test_access_endpoint(index_client, drs_client, async_client):
     did = rec["did"]
     protocol = "s3"
     full_url = drs_client.url + "/ga4gh/drs/v1/objects/" + did + "/access/" + protocol
-    request = respx.get(full_url, status_code=200)
+    request = respx.get(full_url).mock(return_value=httpx.Response(200))
     loop = asyncio.get_event_loop()
 
     res3 = (

@@ -575,14 +575,14 @@ use_chardet_on_py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
 name = "respx"
-version = "0.13.0"
+version = "0.19.2"
 description = "A utility for mocking out the Python HTTPX and HTTP Core libraries."
 category = "dev"
 optional = false
 python-versions = ">=3.6"
 
 [package.dependencies]
-httpx = ">=0.15"
+httpx = ">=0.21.0"
 
 [[package]]
 name = "rfc3986"
@@ -715,7 +715,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.9,<3.10"
-content-hash = "9a9b60e65c4d817109836cdacb257f544c3de7b87a659bb8256d49aa7f7da119"
+content-hash = "686451eb43b6a174c925ef2efa5a99221a57bfa8e8fd917fedabffac4ef5d5cb"
 
 [metadata.files]
 anyio = [
@@ -909,10 +909,7 @@ pytest = [
     {file = "pytest-5.4.3.tar.gz", hash = "sha256:7979331bfcba207414f5e1263b5a0f8f521d0f457318836a7355531ed1a4c7d8"},
 ]
 requests = []
-respx = [
-    {file = "respx-0.13.0-py2.py3-none-any.whl", hash = "sha256:209eb9a8ec02e3c62d7a46ba8b57e94bfc5eba419f7a18badcb6fc95e5a6f451"},
-    {file = "respx-0.13.0.tar.gz", hash = "sha256:b644268dcbc2cad45fd116453fd80ea3fd6e1930104d0e1e09fb757c13751dd7"},
-]
+respx = []
 rfc3986 = [
     {file = "rfc3986-1.5.0-py2.py3-none-any.whl", hash = "sha256:a86d6e1f5b1dc238b218b012df0aa79409667bb209e58da56d0b94704e712a97"},
     {file = "rfc3986-1.5.0.tar.gz", hash = "sha256:270aaf10d87d0d4e095063c65bf3ddbc6ee3d0b226328ce21e036f946e421835"},
