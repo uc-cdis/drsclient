@@ -19,5 +19,5 @@ indexd = {git = "https://github.com/uc-cdis/indexd.git", rev = "3.4.0"}
 respx = "^0.21.0"
 
 [build-system]
-requires = ["poetry>=0.12"]
+requires = ["poetry>=1.4.1"]
 build-backend = "poetry.masonry.api"
