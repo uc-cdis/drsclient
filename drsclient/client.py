@@ -283,6 +283,9 @@ class DrsClient(object):
     @retry_and_timeout_wrapper
     @maybe_sync
     async def _get(self, client_cls, *path, **kwargs):
+        # Drop empty params that cause URL mismatch with respx
+        if "params" in kwargs and (kwargs["params"] is None or kwargs["params"] == {}):
+            kwargs.pop("params")
         async with client_cls() as client:
             kwargs = self._check_auth_type(**kwargs)
             resp = await client.get(self.url_for(*path), **kwargs)
