@@ -56,8 +56,8 @@ class DrsClient(object):
         self.token = token
 
     def url_for(self, *path):
-        subpath = "/".join(path).lstrip("/")
-        return "{}/{}".format(self.url.rstrip("/"), subpath)
+        subpath = "/".join(str(p).strip("/") for p in path)
+        return f"{self.url}/{subpath}"
 
     def check_status(self, status_endpoint="/index"):
         """Check that the API we are trying to communicate with is online"""
@@ -78,15 +78,12 @@ class DrsClient(object):
         # endpoint += "/" + guid + "/access/" + protocol
         # response = self._get(SyncClient, endpoint)
         # return response
-        url = f"{self.url.rstrip('/')}{endpoint}/{guid}/access/{protocol}"
-        return self._get(SyncClient, url)
+        endpoint = endpoint.strip("/")  # tolerate leading/trailing slashes
+        return self._get(SyncClient, endpoint, guid, "access", protocol)
 
     async def async_download(self, guid, protocol, endpoint="/ga4gh/drs/v1/objects"):
-        # endpoint += "/" + guid + "/access/" + protocol
-        # response = await self._get(httpx.AsyncClient, endpoint)
-        # return response
-        url = f"{self.url.rstrip('/')}{endpoint}/{guid}/access/{protocol}"
-        return await self._get(httpx.AsyncClient, url)
+        endpoint = endpoint.strip("/")
+        return await self._get(httpx.AsyncClient, endpoint, guid, "access", protocol)
 
     def get_all(
         self,
@@ -287,20 +284,12 @@ class DrsClient(object):
     @retry_and_timeout_wrapper
     @maybe_sync
     async def _get(self, client_cls, *path, **kwargs):
-        # Drop empty params that cause URL mismatch with respx
+        # Drop empty params so we don't end up with "?"/URL-mismatch
         if "params" in kwargs and not kwargs["params"]:
             kwargs.pop("params")
-        if (
-            len(path) == 1
-            and isinstance(path[0], str)
-            and path[0].startswith(("http://", "https://"))
-        ):
-            url = path[0]
-        else:
-            url = self.url_for(*path)
         async with client_cls() as client:
             kwargs = self._check_auth_type(**kwargs)
-            resp = await client.get(url, **kwargs)
+            resp = await client.get(self.url_for(*path), **kwargs)
             return resp
 
     @retry_and_timeout_wrapper
