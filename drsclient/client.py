@@ -75,14 +75,18 @@ class DrsClient(object):
         return response
 
     def download(self, guid, protocol, endpoint="/ga4gh/drs/v1/objects"):
-        endpoint += "/" + guid + "/access/" + protocol
-        response = self._get(SyncClient, endpoint)
-        return response
+        # endpoint += "/" + guid + "/access/" + protocol
+        # response = self._get(SyncClient, endpoint)
+        # return response
+        url = f"{self.url.rstrip('/')}{endpoint}/{guid}/access/{protocol}"
+        return self._get(SyncClient, url)
 
     async def async_download(self, guid, protocol, endpoint="/ga4gh/drs/v1/objects"):
-        endpoint += "/" + guid + "/access/" + protocol
-        response = await self._get(httpx.AsyncClient, endpoint)
-        return response
+        # endpoint += "/" + guid + "/access/" + protocol
+        # response = await self._get(httpx.AsyncClient, endpoint)
+        # return response
+        url = f"{self.url.rstrip('/')}{endpoint}/{guid}/access/{protocol}"
+        return await self._get(httpx.AsyncClient, url)
 
     def get_all(
         self,
@@ -284,11 +288,19 @@ class DrsClient(object):
     @maybe_sync
     async def _get(self, client_cls, *path, **kwargs):
         # Drop empty params that cause URL mismatch with respx
-        if "params" in kwargs and (kwargs["params"] is None or kwargs["params"] == {}):
+        if "params" in kwargs and not kwargs["params"]:
             kwargs.pop("params")
+        if (
+            len(path) == 1
+            and isinstance(path[0], str)
+            and path[0].startswith(("http://", "https://"))
+        ):
+            url = path[0]
+        else:
+            url = self.url_for(*path)
         async with client_cls() as client:
             kwargs = self._check_auth_type(**kwargs)
-            resp = await client.get(self.url_for(*path), **kwargs)
+            resp = await client.get(url, **kwargs)
             return resp
 
     @retry_and_timeout_wrapper
