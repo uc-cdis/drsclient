@@ -52,7 +52,7 @@ def retry_and_timeout_wrapper(func):
 class DrsClient(object):
     def __init__(self, baseurl, auth=None, token=None):
         self.auth = auth
-        self.url = baseurl
+        self.url = baseurl.rstrip("/")
         self.token = token
 
     def url_for(self, *path):
@@ -61,7 +61,7 @@ class DrsClient(object):
 
     def check_status(self, status_endpoint="/index"):
         """Check that the API we are trying to communicate with is online"""
-        resp = httpx.get(self.url + status_endpoint)
+        resp = httpx.get(self.url_for(status_endpoint))
         return resp
 
     def get(self, guid, endpoint="/ga4gh/drs/v1/objects", expand=False):
