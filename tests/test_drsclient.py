@@ -291,10 +291,20 @@ def test_access_endpoint(index_client, drs_client, async_client):
     rec = create_index_record(index_client)
     did = rec["did"]
     protocol = "s3"
-    full_url = drs_client.url + "/ga4gh/drs/v1/objects/" + did + "/access/" + protocol
+    # full_url = drs_client.url + "/ga4gh/drs/v1/objects/" + did + "/access/" + protocol
+    # request = respx.get(full_url).mock(return_value=httpx.Response(200))
+    # loop = asyncio.get_event_loop()
+
+    # res3 = (
+    #     loop.run_until_complete(drs_client.async_download(did, protocol))
+    #     if async_client
+    #     else drs_client.download(did, protocol)
+    # )
+    # assert request.called
+    # assert res3.status_code == 200
+    full_url = drs_client.url_for("/ga4gh/drs/v1/objects", did, "access", protocol)
     request = respx.get(full_url).mock(return_value=httpx.Response(200))
     loop = asyncio.get_event_loop()
-
     res3 = (
         loop.run_until_complete(drs_client.async_download(did, protocol))
         if async_client
