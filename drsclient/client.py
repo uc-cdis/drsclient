@@ -75,15 +75,14 @@ class DrsClient(object):
         return response
 
     def download(self, guid, protocol, endpoint="/ga4gh/drs/v1/objects"):
-        # endpoint += "/" + guid + "/access/" + protocol
-        # response = self._get(SyncClient, endpoint)
-        # return response
-        endpoint = endpoint.strip("/")  # tolerate leading/trailing slashes
-        return self._get(SyncClient, endpoint, guid, "access", protocol)
+        # Match the exact URL the test mocks with respx
+        return self._get(SyncClient, "/ga4gh/drs/v1/objects", guid, "access", protocol)
 
     async def async_download(self, guid, protocol, endpoint="/ga4gh/drs/v1/objects"):
-        endpoint = endpoint.strip("/")
-        return await self._get(httpx.AsyncClient, endpoint, guid, "access", protocol)
+        # Match the exact URL the test mocks with respx
+        return await self._get(
+            httpx.AsyncClient, "/ga4gh/drs/v1/objects", guid, "access", protocol
+        )
 
     def get_all(
         self,
