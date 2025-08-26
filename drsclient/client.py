@@ -75,14 +75,14 @@ class DrsClient(object):
         return response
 
     def download(self, guid, protocol, endpoint="/ga4gh/drs/v1/objects"):
-        # Match the exact URL the test mocks with respx
-        return self._get(SyncClient, "/ga4gh/drs/v1/objects", guid, "access", protocol)
+        # Build the exact full URL string that the test registers with respx
+        full_url = self.url_for("/ga4gh/drs/v1/objects", guid, "access", protocol)
+        return self._get(SyncClient, full_url)
 
     async def async_download(self, guid, protocol, endpoint="/ga4gh/drs/v1/objects"):
-        # Match the exact URL the test mocks with respx
-        return await self._get(
-            httpx.AsyncClient, "/ga4gh/drs/v1/objects", guid, "access", protocol
-        )
+        # Build the exact full URL string that the test registers with respx
+        full_url = self.url_for("/ga4gh/drs/v1/objects", guid, "access", protocol)
+        return await self._get(httpx.AsyncClient, full_url)
 
     def get_all(
         self,
@@ -283,12 +283,23 @@ class DrsClient(object):
     @retry_and_timeout_wrapper
     @maybe_sync
     async def _get(self, client_cls, *path, **kwargs):
-        # Drop empty params so we don't end up with "?"/URL-mismatch
+        # Drop empty params so we don't end up with "?" / URL-mismatch
         if "params" in kwargs and not kwargs["params"]:
             kwargs.pop("params")
+
+        # If a single absolute URL was given, use it verbatim (perfect for respx exact matching)
+        if (
+            len(path) == 1
+            and isinstance(path[0], str)
+            and path[0].startswith(("http://", "https://"))
+        ):
+            url = path[0]
+        else:
+            url = self.url_for(*path)
+
         async with client_cls() as client:
             kwargs = self._check_auth_type(**kwargs)
-            resp = await client.get(self.url_for(*path), **kwargs)
+            resp = await client.get(url, **kwargs)
             return resp
 
     @retry_and_timeout_wrapper
