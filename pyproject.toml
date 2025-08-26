@@ -16,7 +16,7 @@ backoff = "^1.10.0"
 pytest = "^5.2"
 cdisutilstest = {git = "https://github.com/uc-cdis/cdisutils-test.git", rev = "1.0.0"}
 indexd = {git = "https://github.com/uc-cdis/indexd.git", rev = "3.4.0"}
-respx = "^0.21.1"
+respx = "^0.22.0"
 
 [build-system]
 requires = ["poetry>=1.4.1"]
