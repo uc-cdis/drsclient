@@ -8,7 +8,7 @@ license = "Apache-2.0"
 [tool.poetry.dependencies]
 python = "^3.9"
 requests = "^2.23.0"
-httpx = "^0.27.0"
+httpx = ">=0.28.1,<1.0.0"
 asyncio = "^3.4.3"
 backoff = "^1.10.0"
 
@@ -16,7 +16,7 @@ backoff = "^1.10.0"
 pytest = "^5.2"
 cdisutilstest = {git = "https://github.com/uc-cdis/cdisutils-test.git", rev = "1.0.0"}
 indexd = {git = "https://github.com/uc-cdis/indexd.git", rev = "3.4.0"}
-respx = "^0.21.0"
+respx = "^0.22.0"
 
 [build-system]
 requires = ["poetry>=1.4.1"]
