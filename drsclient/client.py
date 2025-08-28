@@ -282,7 +282,6 @@ class DrsClient(object):
         async with client_cls() as client:
             kwargs = self._check_auth_type(**kwargs)
             resp = await client.get(self.url_for(*path), **kwargs)
-            print(resp)
             return resp
 
     @retry_and_timeout_wrapper
