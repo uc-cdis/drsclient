@@ -3,8 +3,6 @@ on:
   push:
     tags:
       - '*'
-    branches:
-      - '*'
 jobs:
   PyPIPoetryPublish:
     name: PyPI Poetry Publish
