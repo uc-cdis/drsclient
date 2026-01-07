@@ -1,3 +1,3 @@
-import pkg_resources
+# import pkg_resources
 
-__version__ = pkg_resources.get_distribution("drsclient").version
+# __version__ = pkg_resources.get_distribution("drsclient").version
