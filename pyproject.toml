@@ -1,22 +1,21 @@
 [tool.poetry]
 name = "drsclient"
-version = "0.3.2"
+version = "0.4.0"
 description = "GA4GH DRS Client"
 authors = ["CTDS UChicago <cdis@uchicago.edu>"]
 license = "Apache-2.0"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.13, <4"
 requests = "^2.23.0"
 httpx = ">=0.28.1,<1.0.0"
-asyncio = "^3.4.3"
-backoff = "^1.10.0"
 
-[tool.poetry.dev-dependencies]
-pytest = "^5.2"
+[tool.poetry.group.dev.dependencies]
+pytest = ">=6.2.5"
 cdisutilstest = {git = "https://github.com/uc-cdis/cdisutils-test.git", rev = "1.0.0"}
 indexd = {git = "https://github.com/uc-cdis/indexd.git", rev = "3.4.0"}
 respx = "^0.22.0"
+deptry = "^0.24.0"
 
 [build-system]
 requires = ["poetry>=1.4.1"]
