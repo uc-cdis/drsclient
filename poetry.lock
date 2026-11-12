@@ -941,6 +941,18 @@ files = [
 all = ["coverage (>=7.10.0)", "hypothesis (>=6.141.1)", "mypy (>=1.11.2)", "pytest (>=8.3.2)", "ruff (>=0.16.0)", "ty (>=0.0.37)"]
 
 [[package]]
+name = "indexclient"
+version = "6.3.0"
+description = ""
+optional = false
+python-versions = "<4.0,>=3.13"
+groups = ["dev"]
+files = [
+    {file = "indexclient-6.3.0-py3-none-any.whl", hash = "sha256:77ea96da39cbd61d68703ac13cb54ca0de2305e0251ab0158b833d440e479c4a"},
+    {file = "indexclient-6.3.0.tar.gz", hash = "sha256:72bc79049d8c596eafcf5e9a94d44dd9116ba56c09f36b71eda5b418d0761199"},
+]
+
+[[package]]
 name = "indexd"
 version = "6.4.3"
 description = "Gen3 Indexing Service"
@@ -973,8 +985,8 @@ sqlalchemy-utils = "^0.37.3"
 [package.source]
 type = "git"
 url = "https://github.com/uc-cdis/indexd.git"
-reference = "7.0.0"
-resolved_reference = "bd5629e9496d91c2e8c957cd18cfbc7ae0bc1587"
+reference = "7.0.1"
+resolved_reference = "f2b5335f62ca6dd436fed6ad94cfb96588345e64"
 
 [[package]]
 name = "iniconfig"
@@ -1786,4 +1798,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13, <4"
-content-hash = "f23fd9508fb238e8375cac1e9b57d6b56c1c654fbafc5a530457a250fb4ffb6e"
+content-hash = "cc30f1a3fd346e19d8844500e289b8198734228a07556ccccc14a1c0c058cc68"
